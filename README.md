@@ -1,2 +1,2 @@
 # ByzShield
-ByzShield robust distributed ML framework implementation
+ByzShield's robust distributed ML framework implementation
