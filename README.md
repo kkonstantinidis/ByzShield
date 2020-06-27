@@ -107,72 +107,20 @@ Now that we have installed all needed dependencies on the remote EC2 instance, w
 We will use Amazon Elastic File System (EFS) to share a folder with the trained model among the machines. Follow the [EFS_create][instructions] to create an EFS. We will probably need a security group with the settings discussed above for the EFS too. Make note of the IP address of the EFS `xxx.xxx.xxx.xxx`.
 
 ## Cluster configuration
-The script `pytorch_ec2.py` will la launch the instances automatically. Before running it, you should edit the following part:
-```sh
+The script `pytorch_ec2.py` will launch the instances automatically. Before running it, you need to copy your AWS private key file `xxxxxx.pem` to the folder `./tools` and then edit the following part:
+```python
 cfg = Cfg({
-    "name" : "Timeout",      # Unique name for this specific configuration
-    "key_name": "virginiakey",          # ~ Necessary to ssh into created instances, WITHOUT .pem
-    # Cluster topology
-    "n_masters" : 1,                      # Should always be 1
-    "n_workers" : 15,
-    "num_replicas_to_aggregate" : "8", # deprecated, not necessary
-    "method" : "spot",
-    # Region speficiation
-    "region" : "us-east-1",
-    "availability_zone" : "us-east-1c",
-    # Machine type - instance type configuration.
-    "master_type" : "r3.xlarge",
-    "worker_type" : "r3.xlarge",
-    # please only use this AMI for pytorch
-    "image_id": "ami-022c3bc433cd214b4",
-    # Launch specifications
+    "key_name": "{Your AWS private key file without the .pem extenion}",
+    "n_workers" : {Number of workers (K)},
+    "region" : "{Your AWS region, e.g., us-east-1}",
+    "availability_zone" : "{Your AWS subnet, e.g., us-east-1c}",
+    "master_type" : "{Instance type of PS, e.g., r3.xlarge}",
+    "worker_type" : "{Instance type of workers, e.g., r3.xlarge}",
+    "image_id": "{AMI ID created before, like ami-xxxxxxxxxxxxxxxx}",
     "spot_price" : "0.5",                 # Has to be a string
-    # SSH configuration
-    "ssh_username" : "ubuntu",            # For sshing. E.G: ssh ssh_username@hostname
-    "path_to_keyfile" : "virginiakey.pem", # ~ be careful with this path since the execution path depends on where you run the code from
-
-    # NFS configuration
-    # To set up these values, go to Services > Elastic File System > Create file system, and follow the directions.
-    "nfs_ip_address" : "172.31.18.129",          # us-east-1c
-    "nfs_mount_point" : "/home/ubuntu/shared",       # NFS base dir
-    "base_out_dir" : "%(nfs_mount_point)s/%(name)s", # Master writes checkpoints to this directory. Outfiles are written to this directory.
-    "setup_commands" :
-    [
-        "mkdir %(base_out_dir)s",
-    ],
-    # Command specification
-    # Master pre commands are run only by the master
-    "master_pre_commands" :
-    [
-        "cd my_mxnet",
-        "git fetch && git reset --hard origin/master",
-        "cd cifar10",
-        "ls",
-    ],
-    # Pre commands are run on every machine before the actual training.
-    "pre_commands" :
-    [
-        "cd my_mxnet",
-        "git fetch && git reset --hard origin/master",
-        "cd cifar10",
-    ],
-    # Model configuration
-    "batch_size" : "4", # ~ never used
-    "max_steps" : "2000", # ~ never used
-    "initial_learning_rate" : ".001", # ~ never used
-    "learning_rate_decay_factor" : ".9", # ~ never used
-    "num_epochs_per_decay" : "1.0", # ~ never used
-    # Train command specifies how the ps/workers execute tensorflow.
-    # PS_HOSTS - special string replaced with actual list of ps hosts.
-    # TASK_ID - special string replaced with actual task index.
-    # JOB_NAME - special string replaced with actual job name.
-    # WORKER_HOSTS - special string replaced with actual list of worker hosts
-    # ROLE_ID - special string replaced with machine's identity (E.G: master, worker0, worker1, ps, etc)
-    # %(...)s - Inserts self referential string value.
-    "train_commands" :
-    [
-        "echo ========= Start ==========="
-    ],
+    "path_to_keyfile" : "{Your AWS private key file with the .pem extenion, like xxxxxx.pem}",
+    "nfs_ip_address" : "{IP address of the EFS xxx.xxx.xxx.xxx}",
+    "nfs_mount_point" : "/home/ubuntu/shared",
 })
 ```
 
