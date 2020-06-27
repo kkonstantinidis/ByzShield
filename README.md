@@ -101,7 +101,7 @@ We will now discuss how one can launch a cluster and train/test a model. In the 
  - `b`: batchsize.
 
 ## Remote AMI
-Now that we have installed all needed dependencies on the remote EC2 instance, we need to make an AMI image of it so that we can quickly launch PS/worker instances out of it. 
+Now that we have installed all needed dependencies on the remote EC2 instance, we need to make an AMI image of it so that we can quickly launch PS/worker instances out of it. For instructions see [here][AMI_create]. Make note of the AMI ID, like `ami-xxxxxxxxxxxxxxxx`.
 
 ## Training
 The training algorithm should be run by the PS instance executing file `run_pytorch.sh`. The basic arguments of this script along with all possible values are below. This is not an exhaustive list of all arguments but only the basic ones, the remaining can be left to their default values in `run_pytorch.sh`.
@@ -133,3 +133,4 @@ The training algorithm should be run by the PS instance executing file `run_pyto
 [configure]: <https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html>
 [Launch]: <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/launching-instance.html>
 [AMI]: <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html>
+[AMI_create]: <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html>
