@@ -110,17 +110,17 @@ We will use Amazon Elastic File System (EFS) to share a folder with the trained 
 The script `pytorch_ec2.py` will launch the instances automatically. Before running it, you need to copy your AWS private key file `xxxxxx.pem` to the folder `./tools` and then edit the following part:
 ```python
 cfg = Cfg({
-    "key_name": "{Your AWS private key file without the .pem extenion}",                       # string
-    "n_workers" : {Number of workers (K)},                                                     # integer
-    "region" : "{Your AWS region, e.g., us-east-1}",                                           # string
-    "availability_zone" : "{Your AWS subnet, e.g., us-east-1c}",                               # string
-    "master_type" : "{Instance type of PS, e.g., r3.xlarge}",                                  # string
-    "worker_type" : "{Instance type of workers, e.g., r3.xlarge}",                             # string
-    "image_id": "{AMI ID created before, like ami-xxxxxxxxxxxxxxxx}",                          # string
-    "spot_price" : "{Dollar amount at least max(price of PS, price of worker), e.g., 3.5}",    # float
-    "path_to_keyfile" : "{Your AWS private key file with the .pem extenion, like xxxxxx.pem}", # string
-    "nfs_ip_address" : "{IP address of the EFS xxx.xxx.xxx.xxx}",                              # string
-    "nfs_mount_point" : "/home/ubuntu/shared",                                                 # string
+    "key_name": "{Your AWS private key file without the .pem extenion}",                                         # string
+    "n_workers" : {Number of workers (K)},                                                                       # integer
+    "region" : "{Your AWS region, e.g., us-east-1}",                                                             # string
+    "availability_zone" : "{Your AWS subnet, e.g., us-east-1c}",                                                 # string
+    "master_type" : "{Instance type of PS, e.g., r3.xlarge}",                                                    # string
+    "worker_type" : "{Instance type of workers, e.g., r3.xlarge}",                                               # string
+    "image_id": "{AMI ID created before, like ami-xxxxxxxxxxxxxxxx}",                                            # string
+    "spot_price" : "{Dollar amount per machine per hour at least max(price of PS, price of worker), e.g., 3.5}", # float
+    "path_to_keyfile" : "{Your AWS private key file with the .pem extenion, like xxxxxx.pem}",                   # string
+    "nfs_ip_address" : "{IP address of the EFS xxx.xxx.xxx.xxx}",                                                # string
+    "nfs_mount_point" : "/home/ubuntu/shared",                                                                   # string
 })
 ```
 
