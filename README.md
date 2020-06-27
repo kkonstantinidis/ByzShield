@@ -107,7 +107,7 @@ Now that we have installed all needed dependencies on the remote EC2 instance, w
 We will use Amazon Elastic File System (EFS) to share a folder with the trained model among the machines. Follow the [EFS_create][instructions] to create an EFS. We will probably need a security group with the settings discussed above for the EFS too. Make note of the IP address of the EFS `xxx.xxx.xxx.xxx`.
 
 ## Cluster configuration
-The script `pytorch_ec2.py` will launch the instances automatically. Before running it, you need to copy your AWS private key file `xxxxxx.pem` to the folder `./tools` and then edit the following part:
+The script `pytorch_ec2.py` will launch the instances automatically. Before running it, you need to copy your AWS private key file `xxxxxx.pem` to the folder `./tools` and then edit the following part of the configuration (the rest of the parameters can be left unchanged and have been omitted here):
 ```python
 cfg = Cfg({
     "key_name": "{Your AWS private key file without the .pem extenion}",                                         # string
@@ -120,7 +120,7 @@ cfg = Cfg({
     "spot_price" : "{Dollar amount per machine per hour at least max(price of PS, price of worker), e.g., 3.5}", # float
     "path_to_keyfile" : "{Your AWS private key file with the .pem extenion, like xxxxxx.pem}",                   # string
     "nfs_ip_address" : "{IP address of the EFS xxx.xxx.xxx.xxx}",                                                # string
-    "nfs_mount_point" : "/home/ubuntu/shared",                                                                   # string
+    "nfs_mount_point" : "{Path to EFS folder, e.g., /home/ubuntu/shared}",                                       # string
 })
 ```
 
