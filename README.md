@@ -117,7 +117,7 @@ cfg = Cfg({
     "master_type" : "{Instance type of PS, e.g., r3.xlarge}",                                  # string
     "worker_type" : "{Instance type of workers, e.g., r3.xlarge}",                             # string
     "image_id": "{AMI ID created before, like ami-xxxxxxxxxxxxxxxx}",                          # string
-    "spot_price" : "{Maximum spot price you want to pay per hour, e.g., 3.5, should be greater than max(price of PS, price of worker)}", # float
+    "spot_price" : "{Dollar amount at least max(price of PS, price of worker), e.g., 3.5}",    # float
     "path_to_keyfile" : "{Your AWS private key file with the .pem extenion, like xxxxxx.pem}", # string
     "nfs_ip_address" : "{IP address of the EFS xxx.xxx.xxx.xxx}",                              # string
     "nfs_mount_point" : "/home/ubuntu/shared",                                                 # string
