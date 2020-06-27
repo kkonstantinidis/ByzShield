@@ -120,11 +120,11 @@ The training algorithm should be run by the PS instance executing file `run_pyto
 | `hostfile`      | Path to MPI hostfile that contains the private IPs of all nodes of the cluster. If ran on AWS this file will be `hosts_address`, discussed above. If ran locally this file can be a plain txt with content `localhost:{n+1}` |
 | `lr` | Inital learning rate. |
 | `momentum` | Value of momentum. |
-| `network` | Deep neural net to be used: `LeNet`,`ResNet18`,`ResNet34`,`ResNet50`,`DenseNet`,`VGG11` or `VGG13`. |
-| `dataset` | Datasets use for training. |
-| `batch-size` | Batch size for optimization algorithms. |
-| `mode` | Robust aggregation methods e.g. `bulyan`, `multi-krum`, `coord-median`, `signSGD` |
-| `approach`  | This can be set to `baseline`, `draco-lite`(DETOX), and `maj_vote` |
+| `network` | Deep neural net: `LeNet`,`ResNet18`,`ResNet34`,`ResNet50`,`DenseNet`,`VGG11` or `VGG13`. |
+| `dataset` | Data set: `MNIST`, `Cifar10`, `SVHN` or `Cifar100`. |
+| `batch-size` | Batchsize, equal to b in paper. |
+| `mode` | Robust aggregation method: `coord-median`, `bulyan` or `multi-krum` |
+| `approach`  | Distributed learning scheme `baseline` (vanilla), `mols` (proposed MOLS), , `rama_one` (proposed Ramanujan Case 1), `rama_two` (proposed Ramanujan Case 2), `draco-lite` (DETOX), `maj_vote`, `draco_lite_attack` (our attack on DETOX) |
 | `eval-freq` | Frequency of iterations to evaluation the model. |
 | `err-mode`    | Byzantine attack to simulate can be set as `rev_grad` or `constant`   |
 | `adversarial`    |  |
