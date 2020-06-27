@@ -112,26 +112,26 @@ We will now discuss how one can launch a cluster and train/test a model. In the 
  - `b`: batchsize.
 
 ## Training
-The training algorithm should be run by the PS instance executing file `run_pytorch.sh`. The basic arguments of this script along with all possible values are the following:
+The training algorithm should be run by the PS instance executing file `run_pytorch.sh`. The basic arguments of this script along with all possible values are below. This is not an exhaustive list of all arguments but only the basic ones, the remaining can be left to their default values in `run_pytorch.sh`.
 
 | Argument                      | Values/description                                 |
 | ----------------------------- | ---------------------------------------- |
 | `n` | Total number of nodes (PS and workers), equal to K+1 in paper |
-| `hostfile`      | Path to MPI hostfile that contains the private IPs of all nodes of the cluster. If ran on AWS this file will be `hosts_address`, discussed above. If ran locally this file can be a plain txt with content `localhost:{K+1}` |
-| `lr` | Inital learning rate that will be use. |
-| `momentum` | Value of momentum that will be use. |
+| `hostfile`      | Path to MPI hostfile that contains the private IPs of all nodes of the cluster. If ran on AWS this file will be `hosts_address`, discussed above. If ran locally this file can be a plain txt with content `localhost:{n+1}` |
+| `lr` | Inital learning rate. |
+| `momentum` | Value of momentum. |
 | `network` | Types of deep neural nets, currently `LeNet`, `ResNet-18/32/50/110/152`, and `VGGs` are supported. |
 | `dataset` | Datasets use for training. |
 | `batch-size` | Batch size for optimization algorithms. |
-| `comm-type` | A fake parameter, please always set it to be `Bcast`, which gives you logarithmic comm complexity. |
-| `num-aggregate` | Number of gradients required for the PS to aggregate. |
 | `mode` | Robust aggregation methods e.g. `bulyan`, `multi-krum`, `coord-median`, `signSGD` |
 | `approach`  | This can be set to `baseline`, `draco-lite`(DETOX), and `maj_vote` |
-| `epochs`    | The maximal number of epochs to train (somehow redundant).   |
-| `err-mode`    | Byzantine attack to simulate can be set as `rev_grad` or `constant`   |
-| `max-steps`    | total number if iterations to run.   |
 | `eval-freq` | Frequency of iterations to evaluation the model. |
+| `err-mode`    | Byzantine attack to simulate can be set as `rev_grad` or `constant`   |
+| `adversarial`    |  |
+| `epochs`    | The maximal number of epochs to train (somehow redundant).   |
+| `max-steps`    | total number if iterations to run.   |
 | `worker-fail` | Number of Byzantine nodes to simulate. |
+| `group-size` | Number of Byzantine nodes to simulate. |
 | `lis-simulation` | Enable the ["A little is enough attack"](https://arxiv.org/pdf/1902.06156.pdf), note that if this is set to `simulate`, the `err-mode` won't work any more. |
 |`train-dir`  | Directory to save model checkpoints for evaluation. |
 
