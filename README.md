@@ -9,7 +9,7 @@ We will be working with Python 2 for the local machine (to execute the bash scri
 
 ## AWS EC2 setup
 The first steps we need to do before installing the required packages are
- - [Install] and [configure] AWS CLI on the local machine (tested with version )
+ - [Install] and [configure] AWS CLI on the local machine (tested with version 2.0.16)
  - Add Night Mode
 
 ## Prerequisites/Anaconda installation (both local and remote)
