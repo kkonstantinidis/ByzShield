@@ -117,7 +117,7 @@ The training algorithm should be run by the PS instance executing file `run_pyto
 | Argument                      | Values/description                                 |
 | ----------------------------- | ---------------------------------------- |
 | `n` | Total number of nodes (PS and workers), equal to K+1 in paper |
-| `hostfile`      | Path to MPI hostfile that contains the private IPs of all nodes of the cluster. If ran on AWS this file will be `hosts_address`, discussed above. If ran locally this file should have the form `localhost:{K+1}` (can be a plain txt) |
+| `hostfile`      | Path to MPI hostfile that contains the private IPs of all nodes of the cluster. If ran on AWS this file will be `hosts_address`, discussed above. If ran locally this file can be a plain txt with content `localhost:{K+1}` |
 | `lr` | Inital learning rate that will be use. |
 | `momentum` | Value of momentum that will be use. |
 | `network` | Types of deep neural nets, currently `LeNet`, `ResNet-18/32/50/110/152`, and `VGGs` are supported. |
