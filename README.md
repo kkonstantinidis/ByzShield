@@ -104,6 +104,13 @@ cd hdmedians
 python setup.py install
 ```
 
+# Job launching
+We will now discuss how one can launch a cluster and train/test a model. In the sequel, we will use the notation `{x}` to denote a piece of a script that should be substituted with the value `x`. Some notation used in the paper that we will refer to is:
+ - `K`: number of workers.
+ - `q`: number of Byzantine workers.
+ - `r`: replication.
+ - `b`: batchsize.
+
 ## Training
 The training algorithm should be run by the PS instance executing file `run_pytorch.sh`. The basic arguments of this script along with all possible values are the following:
 
