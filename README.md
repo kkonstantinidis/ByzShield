@@ -56,7 +56,7 @@ conda install -c anaconda boto3
 For the remote cluster (PS/workers) the tested dependencies are
 | Module | Version |
 | ------ | ------ |
-| python | 3.7 |
+| python | 3.7.7 |
 | pip | 20.1.1 |
 | setuptools | 47.1.1 |
 | pytorch | 1.0.1 |
