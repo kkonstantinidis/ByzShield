@@ -53,7 +53,7 @@ conda install -c anaconda boto3
 ```
 
 ## Remote cluster Anaconda environment
-For the remote machines (PS/workers) the tested dependencies are
+For the remote cluster (PS/workers) the tested dependencies are
 | Module | Version |
 | ------ | ------ |
 | python | 3.7 |
