@@ -36,17 +36,24 @@ bash Anaconda3-2020.02-Linux-x86_64.sh
 conda config --set auto_activate_base False
 ```
 
-## Local machine Anaconda environment
-For the local machine the tested dependencies are
-| Module | Version |
-| ------ | ------ |
-| python | 2.7.18 |
-| pip | 20.1.1 |
-| setuptools | 44.1.0 |
-| python-blosc | 1.7.0 |
-| joblib | 0.13.2 |
-| paramiko | 1.18.4 |
-| boto3 | 1.12.39 |
+## Anaconda environments
+The tested dependencies versions for the local/remote machines are
+| Module | Local | Remote |
+| ------ | ------ | ------ |
+| python | 2.7.18 | 3.7.7 |
+| pip | 20.1.1 | 20.1.1 |
+| setuptools | 44.1.0 | 47.1.1 |
+| python-blosc | 1.7.0 | 1.7.0 |
+| joblib | 0.13.2 | 0.15.1 |
+| paramiko | 1.18.4 | 2.7.1 |
+| boto3 | 1.12.39 | 1.9.66 |
+| pytorch | N/A | 1.0.1 |
+| torchvision | N/A | 0.2.2 |
+| libgcc | N/A | 7.2.0 |
+| pandas | N/A | 1.0.3 |
+| scipy | N/A | 1.4.1 |
+| mpi4py | N/A | 3.0.3 |
+| hdmedians | N/A | 0.13 |
 
 The exact series of commands is
 ```sh
