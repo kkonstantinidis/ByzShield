@@ -5,7 +5,7 @@ This project builds on [DETOX] and implements our proposed ByzShield algorithm f
 
 # Requirements
 
-We will be working with Python 2 for the local machine (to execute the bash scripts which configure the remote cluster and initiate training/testing) and with Python 3 for the remote cluster of PS/worker nodes (to execute the actual training/testing). We recommend using an Anaconda (tested with 2020.02) environment in both cases. 
+We will be working with Python 2 for the local machine (to execute the bash scripts which configure the remote cluster and initiate training/testing) and with Python 3 for the remote cluster of PS/worker nodes (to execute the actual training/testing). We recommend using an Anaconda (tested with 2020.02) environment in both cases. Below, we have reported the exact version of each module that worked for us, however your mileage may vary.
 
 ## Prereqisites/Anaconda installation (both local and remote)
 ```sh
@@ -25,6 +25,7 @@ bash Anaconda3-2020.02-Linux-x86_64.sh
 conda config --set auto_activate_base False
 ```
 
+## Local machine Anaconda environment
 For the local machine the tested dependencies are
 | Module | Version |
 | ------ | ------ |
@@ -38,8 +39,15 @@ For the local machine the tested dependencies are
 
 The exact series of commands is
 ```sh
-cd dillinger
-docker build -t joemccann/dillinger:${package.json.version} .
+conda create -n detox_local_python2 python=2.7
+conda activate detox_local_python2
+conda install pip
+python -m pip install --upgrade pip
+pip install --upgrade setuptools
+conda install -c conda-forge python-blosc
+conda install -c anaconda joblib
+conda install -c anaconda paramiko
+conda install -c anaconda boto3
 ```
 
 For the remote machines (PS/worker nodes) the tested dependencies are
