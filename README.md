@@ -9,8 +9,8 @@ We will be working with Python 2 for the local machine (to execute the bash scri
 
 ## AWS EC2 setup
 The first steps we need to do before installing the required packages are
- - [Install] and [configure] AWS CLI on the local machine (tested with version 2.0.16)
- - Add Night Mode
+ - [Install] and [configure] AWS CLI on the local machine (tested with version 2.0.16).
+ - [Launch] an AWS EC2 instance of type "Ubuntu Server 16.04 LTS (HVM), SSD Volume Type (64-bit (x86))". We will install our prerequisites on this instance and we will use it as a basis to create PS/worker instances (see AMI)
 
 ## Prerequisites/Anaconda installation (both local and remote)
 ```sh
@@ -102,3 +102,5 @@ python setup.py install
 [DETOX]: <https://github.com/hwang595/DETOX>
 [Install]: <https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html>
 [configure]: <https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html>
+[Launch]: <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/launching-instance.html>
+[AMI]: <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html>
