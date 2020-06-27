@@ -5,7 +5,12 @@ This project builds on [DETOX] and implements our proposed ByzShield algorithm f
 
 # Requirements
 
-We will be working with Python 2 for the local machine (to execute the bash scripts which configure the remote cluster and initiate training/testing) and with Python 3 for the remote cluster of PS/worker nodes (to execute the actual training/testing). We recommend using an Anaconda (tested with 2020.02) environment in both cases. Below, we have reported the exact version of each module that worked for us, however your mileage may vary.
+We will be working with Python 2 for the local machine (to execute the bash scripts which configure the remote cluster and initiate training/testing) and with Python 3 for the remote cluster of PS/worker nodes (to execute the actual training/testing). We recommend using an Anaconda (tested with 2020.02) environment in both cases. The local machine would typically be a Linux system (tested with Ubuntu). Below, we have reported the exact version of each module that worked for us, however your mileage may vary.
+
+## AWS EC2 setup
+The first steps we need to do before installing the required packages are
+ - [Install] and [configure] AWS CLI on the local machine (tested with version )
+ - Add Night Mode
 
 ## Prerequisites/Anaconda installation (both local and remote)
 ```sh
@@ -95,4 +100,5 @@ cd hdmedians
 python setup.py install
 ```
 [DETOX]: <https://github.com/hwang595/DETOX>
-
+[Install]: <https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html>
+[configure]: <https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html>
