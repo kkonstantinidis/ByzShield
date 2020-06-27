@@ -5,7 +5,7 @@ This project builds on [DETOX] and implements our proposed ByzShield algorithm f
 
 ## Requirements
 
-We will be working with Python 2 for the local machine (to execute the bash scripts which configure the remote cluster and initiate training/testing) and with Python 3 for the PS/worker nodes (to execute the actual training/testing). We recommend using an Anaconda environment in both cases.
+We will be working with Python 2 for the local machine (to execute the bash scripts which configure the remote cluster and initiate training/testing) and with Python 3 for the PS/worker nodes (to execute the actual training/testing). We recommend using an Anaconda environment in both cases. The exact series of commands 
 
 For the local machine the tested dependencies are
 | Module | Version |
