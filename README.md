@@ -104,7 +104,7 @@ We will now discuss how one can launch a cluster and train/test a model. In the 
 Now that we have installed all needed dependencies on the remote EC2 instance, we need to make an AMI image of it so that we can quickly launch PS/worker instances out of it. For instructions see [here][AMI_create]. Make note of the created AMI ID, like `ami-xxxxxxxxxxxxxxxx`.
 
 ## AWS EFS
-We will use Amazon Elastic File System (EFS) to share a folder with the trained model among the machines. Follow the [EFS_create][instructions] to create an EFS. We will probably need a security group with the settings discussed above for the EFS too. Make note of the IP address of the EFS `xxx.xxx.xxx.xxx`.
+We will use Amazon Elastic File System (EFS) to share a folder with the trained model among the machines. Follow the [instructions][EFS_create] to create an EFS. We will probably need a security group with the settings discussed above for the EFS too. Make note of the IP address of the EFS `xxx.xxx.xxx.xxx`.
 
 ## Cluster configuration
 The script `pytorch_ec2.py` will launch the instances automatically. Before running it, you need to copy your AWS private key file `xxxxxx.pem` to the folder `./tools` and then edit the following part of the configuration (the rest of the parameters can be left unchanged and have been omitted here):
