@@ -116,7 +116,7 @@ The training algorithm should be run by the PS instance executing file `run_pyto
 
 | Argument                      | Values/description                                 |
 | ----------------------------- | ---------------------------------------- |
-| `n` | Total number of nodes (PS and workers), equal to K+1 in paper |
+| `n` | Total number of nodes (PS and workers), equal to *K+1* in paper |
 | `hostfile`      | Path to MPI hostfile that contains the private IPs of all nodes of the cluster. If ran on AWS this file will be `hosts_address`, discussed above. If ran locally this file can be a plain txt with content `localhost:{n+1}` |
 | `lr` | Inital learning rate. |
 | `momentum` | Value of momentum. |
@@ -124,16 +124,15 @@ The training algorithm should be run by the PS instance executing file `run_pyto
 | `dataset` | Data set: `MNIST`, `Cifar10`, `SVHN` or `Cifar100`. |
 | `batch-size` | Batchsize, equal to b in paper. |
 | `mode` | Robust aggregation method: `coord-median`, `bulyan` or `multi-krum` |
-| `approach`  | Distributed learning scheme `baseline` (vanilla), `mols` (proposed MOLS), `rama_one` (proposed Ramanujan Case 1), `rama_two` (proposed Ramanujan Case 2), `draco-lite` (DETOX), `draco_lite_attack` (our attack on DETOX), `maj_vote` |
-| `eval-freq` | Frequency of iterations to evaluation the model. |
-| `err-mode`    | Byzantine attack to simulate can be set as `rev_grad` or `constant`   |
-| `adversarial`    |  |
-| `epochs`    | The maximal number of epochs to train (somehow redundant).   |
-| `max-steps`    | total number if iterations to run.   |
-| `worker-fail` | Number of Byzantine nodes to simulate. |
-| `group-size` | Number of Byzantine nodes to simulate. |
-| `lis-simulation` | Enable the ["A little is enough attack"](https://arxiv.org/pdf/1902.06156.pdf), note that if this is set to `simulate`, the `err-mode` won't work any more. |
-|`train-dir`  | Directory to save model checkpoints for evaluation. |
+| `approach` | Distributed learning scheme `baseline` (vanilla), `mols` (proposed MOLS), `rama_one` (proposed Ramanujan Case 1), `rama_two` (proposed Ramanujan Case 2), `draco-lite` (DETOX), `draco_lite_attack` (our attack on DETOX), `maj_vote` |
+| `eval-freq` | Frequency of iterations to backup trained model (for evaluation). |
+| `err-mode` | Byzantine attack to simulate: `rev_grad` (reversed gradient) or `constant` (constant gradient), refer to `src/model_ops/utily.py` for details |
+| `epochs` | Number of epochs to train. |
+| `max-steps` | Total number of iterations (across all epochs). |
+| `worker-fail` | Number of Byzantine workers, equal to *q* in paper. |
+| `group-size` | Replication factor, equal to *r* in paper. |
+| `lis-simulation` | Attack ["A Little Is Enough"](https://arxiv.org/pdf/1902.06156.pdf): `simulate` (enabled) or `no` (disabled), the `err-mode` will be disabled if ALIE attack is enabled. |
+|`train-dir`  | Directory to save model backups for evaluation. |
 
 [DETOX]: <https://github.com/hwang595/DETOX>
 [Install]: <https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html>
