@@ -10,7 +10,7 @@ We will be working with Python 2 for the local machine (to execute the bash scri
 ## AWS EC2 setup
 The first steps we need to do before installing the required packages are
  - [Install] and [configure] AWS CLI on the local machine (tested with version 2.0.16).
- - [Launch] an AWS EC2 instance of AMI "Ubuntu Server 16.04 LTS (HVM), SSD Volume Type (64-bit (x86))". We will install the packages on this instance and we will use it as a basis to create PS/worker instances (see [AMI]). Most of the instance specs are irrelevant but we recommend a minimum 20GiB of storage and a placement group with the following settings
+ - [Launch] an AWS EC2 instance of AMI "Ubuntu Server 16.04 LTS (HVM), SSD Volume Type (64-bit (x86))". We will install the packages on this instance and we will use it as a basis to create PS/worker instances (see [AMI]). Most of the instance specs may be left to their default values but we recommend a minimum 20GiB of storage and a placement group with the following settings
 
 | Type | Protocol | Port Range | Source |
 | ------ | ------ | ------ | ------ |
