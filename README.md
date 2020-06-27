@@ -5,12 +5,29 @@ This project builds on [DETOX] and implements our proposed ByzShield algorithm f
 
 ## Requirements
 
-We will be working with Python 2 for the local machine (to execute the bash scripts which configure the remote cluster and initiate training/testing) and with Python 3 for the PS/worker nodes (to execute the actual training/testing). We recommend using an Anaconda environment in both cases. The exact series of commands 
+We will be working with Python 2 for the local machine (to execute the bash scripts which configure the remote cluster and initiate training/testing) and with Python 3 for the PS/worker nodes (to execute the actual training/testing). We recommend using an Anaconda (tested with 2020.02) environment in both cases. 
 
 For the local machine the tested dependencies are
 | Module | Version |
 | ------ | ------ |
-| Python | 2.7 |
+| Python | 2.7.18 |
+| pip | 20.1.1 |
+| setuptools | 44.1.0 |
+| python-blosc | 1.7.0 |
+| joblib | 0.13.2 |
+| paramiko | 1.18.4 |
+| boto3 | 1.12.39 |
+
+The exact series of commands is
+```sh
+cd dillinger
+docker build -t joemccann/dillinger:${package.json.version} .
+```
+
+For the remote machines (PS/worker nodes) the tested dependencies are
+| Module | Version |
+| ------ | ------ |
+| Python | 3.7 |
 | pip | 20.1.1 |
 | setuptools | 47.1.1 |
 | python-blosc | 1.7.0 |
