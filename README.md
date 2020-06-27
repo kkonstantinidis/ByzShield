@@ -99,6 +99,9 @@ We will now discuss how one can launch a cluster and train/test a model. In the 
  - `r`: replication.
  - `b`: batchsize.
 
+## Remote AMI
+Now that we have installed all needed dependencies on the remote EC2 instance (see [above](#Prerequisites/Anaconda installation (both local and remote)))
+
 ## Training
 The training algorithm should be run by the PS instance executing file `run_pytorch.sh`. The basic arguments of this script along with all possible values are below. This is not an exhaustive list of all arguments but only the basic ones, the remaining can be left to their default values in `run_pytorch.sh`.
 
