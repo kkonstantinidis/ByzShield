@@ -3,7 +3,7 @@ ByzShield's robust distributed ML framework implementation
 
 This project builds on [DETOX] and implements our proposed ByzShield algorithm for robust distributed deep learning. Our placement involves three different techniques, namely MOLS, Ramanujan Case 1 & Ramanujan Case 2. It also includes three different types of attack on the DETOX framework.
 
-### Requirements
+## Requirements
 
 We will be working with Python 2 for the local machine (to execute the bash scripts which configure the remote cluster and initiate training/testing) and with Python 3 for the PS/worker nodes (to execute the actual training/testing). We recommend using an Anaconda environment in both cases.
 
