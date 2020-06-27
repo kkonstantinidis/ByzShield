@@ -103,6 +103,31 @@ git clone https://github.com/daleroberts/hdmedians.git
 cd hdmedians
 python setup.py install
 ```
+
+## Training
+The training algorithm should be run by the PS instance executing file `run_pytorch.sh`. The basic arguments of this script along with all possible values are the following:
+
+| Argument                      | Values/description                                 |
+| ----------------------------- | ---------------------------------------- |
+| `n` | Total number of nodes (PS and workers), equal to K+1 in paper |
+| `hostfile`      | A directory to the file that contains Private IPs of every node in the cluster, we use `hosts_address` here as [mentioned before](#launching-instances). |
+| `lr` | Inital learning rate that will be use. |
+| `momentum` | Value of momentum that will be use. |
+| `network` | Types of deep neural nets, currently `LeNet`, `ResNet-18/32/50/110/152`, and `VGGs` are supported. |
+| `dataset` | Datasets use for training. |
+| `batch-size` | Batch size for optimization algorithms. |
+| `comm-type` | A fake parameter, please always set it to be `Bcast`, which gives you logarithmic comm complexity. |
+| `num-aggregate` | Number of gradients required for the PS to aggregate. |
+| `mode` | Robust aggregation methods e.g. `bulyan`, `multi-krum`, `coord-median`, `signSGD` |
+| `approach`  | This can be set to `baseline`, `draco-lite`(DETOX), and `maj_vote` |
+| `epochs`    | The maximal number of epochs to train (somehow redundant).   |
+| `err-mode`    | Byzantine attack to simulate can be set as `rev_grad` or `constant`   |
+| `max-steps`    | total number if iterations to run.   |
+| `eval-freq` | Frequency of iterations to evaluation the model. |
+| `worker-fail` | Number of Byzantine nodes to simulate. |
+| `lis-simulation` | Enable the ["A little is enough attack"](https://arxiv.org/pdf/1902.06156.pdf), note that if this is set to `simulate`, the `err-mode` won't work any more. |
+|`train-dir`  | Directory to save model checkpoints for evaluation. |
+
 [DETOX]: <https://github.com/hwang595/DETOX>
 [Install]: <https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html>
 [configure]: <https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html>
