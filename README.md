@@ -110,17 +110,17 @@ We will use Amazon Elastic File System (EFS) to share a folder with the trained 
 The script `pytorch_ec2.py` will launch the instances automatically. Before running it, you need to copy your AWS private key file `xxxxxx.pem` to the folder `./tools` and then edit the following part:
 ```python
 cfg = Cfg({
-    "key_name": "{Your AWS private key file without the .pem extenion}",
-    "n_workers" : {Number of workers (K)},
-    "region" : "{Your AWS region, e.g., us-east-1}",
-    "availability_zone" : "{Your AWS subnet, e.g., us-east-1c}",
-    "master_type" : "{Instance type of PS, e.g., r3.xlarge}",
-    "worker_type" : "{Instance type of workers, e.g., r3.xlarge}",
-    "image_id": "{AMI ID created before, like ami-xxxxxxxxxxxxxxxx}",
-    "spot_price" : "0.5",                 # Has to be a string
-    "path_to_keyfile" : "{Your AWS private key file with the .pem extenion, like xxxxxx.pem}",
-    "nfs_ip_address" : "{IP address of the EFS xxx.xxx.xxx.xxx}",
-    "nfs_mount_point" : "/home/ubuntu/shared",
+    "key_name": "{Your AWS private key file without the .pem extenion}",                       # string
+    "n_workers" : {Number of workers (K)},                                                     # integer
+    "region" : "{Your AWS region, e.g., us-east-1}",                                           # string
+    "availability_zone" : "{Your AWS subnet, e.g., us-east-1c}",                               # string
+    "master_type" : "{Instance type of PS, e.g., r3.xlarge}",                                  # string
+    "worker_type" : "{Instance type of workers, e.g., r3.xlarge}",                             # string
+    "image_id": "{AMI ID created before, like ami-xxxxxxxxxxxxxxxx}",                          # string
+    "spot_price" : "{Maximum spot price you want to pay per hour, e.g., 3.5, should be greater than max(price of PS, price of worker)}", # float
+    "path_to_keyfile" : "{Your AWS private key file with the .pem extenion, like xxxxxx.pem}", # string
+    "nfs_ip_address" : "{IP address of the EFS xxx.xxx.xxx.xxx}",                              # string
+    "nfs_mount_point" : "/home/ubuntu/shared",                                                 # string
 })
 ```
 
