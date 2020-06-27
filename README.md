@@ -57,8 +57,8 @@ The tested dependencies versions for the local/remote machines are
 
 The exact series of commands for the *local* machine is
 ```sh
-conda create -n detox_local_python2 python=2.7
-conda activate detox_local_python2
+conda create -n byzshield_local_python2 python=2.7
+conda activate byzshield_local_python2
 conda install pip
 python -m pip install --upgrade pip
 pip install --upgrade setuptools
@@ -70,8 +70,8 @@ conda install -c anaconda boto3
 
 The exact series of commands for the *remote* machine is
 ```sh
-conda create -n detox python=3.7
-conda activate detox
+conda create -n byzshield python=3.7
+conda activate byzshield
 conda install pip
 python -m pip install --upgrade pip
 pip install --upgrade setuptools
