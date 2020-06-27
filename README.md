@@ -52,7 +52,8 @@ conda install -c anaconda paramiko
 conda install -c anaconda boto3
 ```
 
-For the remote machines (PS/worker nodes) the tested dependencies are
+## Remote cluster Anaconda environment
+For the remote machines (PS/workers) the tested dependencies are
 | Module | Version |
 | ------ | ------ |
 | Python | 3.7 |
@@ -63,5 +64,28 @@ For the remote machines (PS/worker nodes) the tested dependencies are
 | paramiko | 2.7.1 |
 | boto3 | 1.9.66 |
 
+The exact series of commands is
+```sh
+conda create -n detox python=3.7
+conda activate detox
+conda install pip
+python -m pip install --upgrade pip
+pip install --upgrade setuptools
+conda install pytorch==1.0.1 torchvision cpuonly -c pytorch
+conda install -c anaconda python-blosc
+conda install -c anaconda joblib
+conda install -c anaconda paramiko
+conda install -c anaconda boto3
+conda install -c anaconda libgcc
+conda install -c anaconda pandas
+conda install -c anaconda scipy
+conda install -c anaconda mpi4py
+
+# Install hdmedians
+sudo apt-get install gcc && sudo apt-get install git
+git clone https://github.com/daleroberts/hdmedians.git
+cd hdmedians
+python setup.py install
+```
 [DETOX]: <https://github.com/hwang595/DETOX>
 
