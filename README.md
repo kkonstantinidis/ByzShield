@@ -132,7 +132,9 @@ The training algorithm should be run by the PS instance executing file `run_pyto
 | `worker-fail` | Number of Byzantine workers, equal to *q* in paper. |
 | `group-size` | Replication factor, equal to *r* in paper. |
 | `lis-simulation` | Attack ["A Little Is Enough"](https://arxiv.org/pdf/1902.06156.pdf): `simulate` (enabled) or `no` (disabled), the `err-mode` will be disabled if ALIE attack is enabled. |
-|`train-dir`  | Directory to save model backups for evaluation. |
+| `train-dir` | Directory to save model backups for evaluation (for AWS this should be the EFS folder). |
+| `local-remote` | `local` (for local training) or `remote` (for training on AWS). |
+| `rama-m` | Value of *m* (in paper), only needed for Ramanujan Case 2. |
 
 [DETOX]: <https://github.com/hwang595/DETOX>
 [Install]: <https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html>
