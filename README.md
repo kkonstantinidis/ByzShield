@@ -31,7 +31,7 @@ conda config --set auto_activate_base False
 For the local machine the tested dependencies are
 | Module | Version |
 | ------ | ------ |
-| Python | 2.7.18 |
+| python | 2.7.18 |
 | pip | 20.1.1 |
 | setuptools | 44.1.0 |
 | python-blosc | 1.7.0 |
@@ -56,13 +56,20 @@ conda install -c anaconda boto3
 For the remote machines (PS/workers) the tested dependencies are
 | Module | Version |
 | ------ | ------ |
-| Python | 3.7 |
+| python | 3.7 |
 | pip | 20.1.1 |
 | setuptools | 47.1.1 |
+| pytorch | 1.0.1 |
+| torchvision | 0.2.2 |
 | python-blosc | 1.7.0 |
 | joblib | 0.15.1 |
 | paramiko | 2.7.1 |
 | boto3 | 1.9.66 |
+| libgcc | 7.2.0 |
+| pandas | 1.0.3 |
+| scipy | 1.4.1 |
+| mpi4py | 3.0.3 |
+| hdmedians | 0.13 |
 
 The exact series of commands is
 ```sh
