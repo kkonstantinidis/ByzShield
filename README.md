@@ -4,10 +4,11 @@ ByzShield's robust distributed ML framework implementation
 This project builds on [DETOX] and implements our proposed ByzShield algorithm for robust distributed deep learning. Our placement involves three different techniques, namely MOLS, Ramanujan Case 1 & Ramanujan Case 2. It also includes three different types of attack on the DETOX framework.
 
 # Requirements
-
 We will be working with Python 2 for the local machine (to execute the bash scripts which configure the remote cluster and initiate training/testing) and with Python 3 for the remote cluster of PS/worker nodes (to execute the actual training/testing). We recommend using an Anaconda (tested with 2020.02) environment in both cases. The local machine would typically be a Linux system (tested with Ubuntu). Below, we have reported the exact version of each module that worked for us, however your mileage may vary.
 
 ## AWS EC2 setup
+This project is intended to be launched on AWS. It also supports local execution (for MNIST) which we won't discuss here but the procedure is very similar (email me if you need instructions for that).
+
 The first steps we need to do before installing the required packages are
  - [Install] and [configure] AWS CLI on the local machine (tested with version 2.0.16).
  - [Launch] an AWS EC2 instance of AMI "Ubuntu Server 16.04 LTS (HVM), SSD Volume Type (64-bit (x86))". We will install the packages on this instance and we will use it as a basis to create PS/worker instances (see [AMI]). Most of the instance specs may be left to their default values but we strongly recommend a minimum 20GiB of storage and a security group with the following settings
@@ -100,7 +101,7 @@ We will now discuss how one can launch a cluster and train/test a model. In the 
  - `b`: batchsize.
 
 ## Remote AMI
-Now that we have installed all needed dependencies on the remote EC2 instance (see [above](#prerequisites/anaconda-installation-(both-local-and-remote)))
+Now that we have installed all needed dependencies on the remote EC2 instance, we need to make an AMI image of it so that we can quickly launch PS/worker instances out of it. 
 
 ## Training
 The training algorithm should be run by the PS instance executing file `run_pytorch.sh`. The basic arguments of this script along with all possible values are below. This is not an exhaustive list of all arguments but only the basic ones, the remaining can be left to their default values in `run_pytorch.sh`.
