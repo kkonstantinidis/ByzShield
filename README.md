@@ -11,7 +11,7 @@ This project is intended to be launched on AWS EC2. It also supports local execu
 
 The first steps we need to do before installing the required packages are
  - [Install] and [configure] AWS CLI on the local machine (tested with version 2.0.16).
- - [Launch] an AWS EC2 instance of AMI "Ubuntu Server 16.04 LTS (HVM), SSD Volume Type (64-bit (x86))". We will install the packages on this instance and we will use it as a basis to create PS/worker instances (see [AMI]). Most of the instance specs may be left to their default values but we strongly recommend a minimum 20GiB of storage and a security group with the following settings
+ - [Launch] an AWS EC2 instance of AMI "Ubuntu Server 16.04 LTS (HVM), SSD Volume Type (64-bit (x86))". We will install the packages on this instance and we will use it as a basis to create PS/worker instances (see [AMI]). Most of the instance specs may be left to their default values but we will probably need a minimum 20GiB of storage and a security group with the following settings
 
 | Type | Protocol | Port Range | Source |
 | ------ | ------ | ------ | ------ |
@@ -101,7 +101,80 @@ We will now discuss how one can launch a cluster and train/test a model. In the 
  - `b`: batchsize.
 
 ## Remote AMI
-Now that we have installed all needed dependencies on the remote EC2 instance, we need to make an AMI image of it so that we can quickly launch PS/worker instances out of it. For instructions see [here][AMI_create]. Make note of the AMI ID, like `ami-xxxxxxxxxxxxxxxx`.
+Now that we have installed all needed dependencies on the remote EC2 instance, we need to make an AMI image of it so that we can quickly launch PS/worker instances out of it. For instructions see [here][AMI_create]. Make note of the created AMI ID, like `ami-xxxxxxxxxxxxxxxx`.
+
+## AWS EFS
+We will use Amazon Elastic File System (EFS) to share a folder with the trained model among the machines. Follow the [EFS_create][instructions] to create an EFS. We will probably need a security group with the settings discussed above for the EFS too. Make note of the IP address of the EFS `xxx.xxx.xxx.xxx`.
+
+## Cluster configuration
+The script `pytorch_ec2.py` will la launch the instances automatically. Before running it, you should edit the following part:
+```sh
+cfg = Cfg({
+    "name" : "Timeout",      # Unique name for this specific configuration
+    "key_name": "virginiakey",          # ~ Necessary to ssh into created instances, WITHOUT .pem
+    # Cluster topology
+    "n_masters" : 1,                      # Should always be 1
+    "n_workers" : 15,
+    "num_replicas_to_aggregate" : "8", # deprecated, not necessary
+    "method" : "spot",
+    # Region speficiation
+    "region" : "us-east-1",
+    "availability_zone" : "us-east-1c",
+    # Machine type - instance type configuration.
+    "master_type" : "r3.xlarge",
+    "worker_type" : "r3.xlarge",
+    # please only use this AMI for pytorch
+    "image_id": "ami-022c3bc433cd214b4",
+    # Launch specifications
+    "spot_price" : "0.5",                 # Has to be a string
+    # SSH configuration
+    "ssh_username" : "ubuntu",            # For sshing. E.G: ssh ssh_username@hostname
+    "path_to_keyfile" : "virginiakey.pem", # ~ be careful with this path since the execution path depends on where you run the code from
+
+    # NFS configuration
+    # To set up these values, go to Services > Elastic File System > Create file system, and follow the directions.
+    "nfs_ip_address" : "172.31.18.129",          # us-east-1c
+    "nfs_mount_point" : "/home/ubuntu/shared",       # NFS base dir
+    "base_out_dir" : "%(nfs_mount_point)s/%(name)s", # Master writes checkpoints to this directory. Outfiles are written to this directory.
+    "setup_commands" :
+    [
+        "mkdir %(base_out_dir)s",
+    ],
+    # Command specification
+    # Master pre commands are run only by the master
+    "master_pre_commands" :
+    [
+        "cd my_mxnet",
+        "git fetch && git reset --hard origin/master",
+        "cd cifar10",
+        "ls",
+    ],
+    # Pre commands are run on every machine before the actual training.
+    "pre_commands" :
+    [
+        "cd my_mxnet",
+        "git fetch && git reset --hard origin/master",
+        "cd cifar10",
+    ],
+    # Model configuration
+    "batch_size" : "4", # ~ never used
+    "max_steps" : "2000", # ~ never used
+    "initial_learning_rate" : ".001", # ~ never used
+    "learning_rate_decay_factor" : ".9", # ~ never used
+    "num_epochs_per_decay" : "1.0", # ~ never used
+    # Train command specifies how the ps/workers execute tensorflow.
+    # PS_HOSTS - special string replaced with actual list of ps hosts.
+    # TASK_ID - special string replaced with actual task index.
+    # JOB_NAME - special string replaced with actual job name.
+    # WORKER_HOSTS - special string replaced with actual list of worker hosts
+    # ROLE_ID - special string replaced with machine's identity (E.G: master, worker0, worker1, ps, etc)
+    # %(...)s - Inserts self referential string value.
+    "train_commands" :
+    [
+        "echo ========= Start ==========="
+    ],
+})
+```
 
 ## Training
 The training algorithm should be run by the PS instance executing file `run_pytorch.sh`. The basic arguments of this script along with all possible values are below. This is not an exhaustive list of all arguments but only the basic ones, the remaining can be left to their default values in `run_pytorch.sh`.
@@ -134,3 +207,4 @@ The training algorithm should be run by the PS instance executing file `run_pyto
 [Launch]: <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/launching-instance.html>
 [AMI]: <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html>
 [AMI_create]: <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html>
+[EFS_create]: <https://docs.aws.amazon.com/efs/latest/ug/gs-step-two-create-efs-resources.html>
