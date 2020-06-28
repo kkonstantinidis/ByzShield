@@ -123,7 +123,7 @@ cfg = Cfg({
     "path_to_keyfile" : "{Your AWS private key file with the .pem extenion, like xxxxxx.pem}",                   # string
     "nfs_ip_address" : "{IP address of the EFS xxx.xxx.xxx.xxx}",                                                # string
     "nfs_mount_point" : "{Path to EFS folder, e.g., /home/ubuntu/shared}",                                       # string
-    "security_group": ["{Name of the AWS security group, mentioned as byzshield_security_group before}"],        # string
+    "security_group": ["{Name of the AWS security group, mentioned before as byzshield_security_group}"],        # string
 })
 ```
 
