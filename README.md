@@ -15,7 +15,9 @@ The first steps we need to do before installing the required packages are
 
 | Type | Protocol | Port Range | Source |
 | ------ | ------ | ------ | ------ |
-| All traffic | All | 0-65535 | Anywhere | 
+| All traffic | All | 0-65535 | Anywhere |
+
+Create a security group ([instructions][security_group_create]) with the above settings and give it a name, e.g., `byzshield_security_group`; we will use it later.
 
 ## Prerequisites/Anaconda installation (both local and remote)
 ```sh
@@ -38,10 +40,10 @@ conda config --set auto_activate_base False
 ```
 
 ## Anaconda environments
-The tested dependencies versions for the local/remote machines are
+The tested dependencies versions for the local/remote machines are given next:
 | Module | Local | Remote |
 | ------ | ------ | ------ |
-| python | 2.7.18 | 3.7.7 |
+| Python | 2.7.18 | 3.7.7 |
 | pip | 20.1.1 | 20.1.1 |
 | setuptools | 44.1.0 | 47.1.1 |
 | python-blosc | 1.7.0 | 1.7.0 |
@@ -161,3 +163,4 @@ The training algorithm should be run by the PS instance executing file `run_pyto
 [AMI]: <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html>
 [AMI_create]: <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html>
 [EFS_create]: <https://docs.aws.amazon.com/efs/latest/ug/gs-step-two-create-efs-resources.html>
+[security_group_create]: <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/working-with-security-groups.html#creating-security-group>
