@@ -144,7 +144,7 @@ The training algorithm should be run by the PS instance executing file `run_pyto
 | `network` | Deep neural net: `LeNet`,`ResNet18`,`ResNet34`,`ResNet50`,`DenseNet`,`VGG11` or `VGG13`. |
 | `dataset` | Data set: `MNIST`, `Cifar10`, `SVHN` or `Cifar100`. |
 | `batch-size` | Batchsize, equal to b in paper. |
-| `mode` | Robust aggregation method: `coord-median`, `bulyan` or `multi-krum` |
+| `mode` | Robust aggregation method: `coord-median`, `bulyan`, `multi-krum` or `maj-vote` |
 | `approach` | Distributed learning scheme `baseline` (vanilla), `mols` (proposed MOLS), `rama_one` (proposed Ramanujan Case 1), `rama_two` (proposed Ramanujan Case 2), `draco-lite` (DETOX), `draco_lite_attack` (our attack on DETOX), `maj_vote` |
 | `eval-freq` | Frequency of iterations to backup trained model (for evaluation). |
 | `err-mode` | Byzantine attack to simulate: `rev_grad` (reversed gradient) or `constant` (constant gradient), refer to `src/model_ops/utily.py` for details |
