@@ -170,16 +170,16 @@ The training algorithm should be run by the PS instance executing file `run_pyto
 | Argument                      | Values/description                                 |
 | ----------------------------- | ---------------------------------------- |
 | `n` | Total number of nodes (PS and workers), equal to *K+1* in paper |
-| `hostfile`      | Path to MPI hostfile that contains the private IPs of all nodes of the cluster. If ran on AWS this file will be `hosts_address`, discussed above. If ran locally this file can be a plain txt with content `localhost:{n+1}` |
+| `hostfile`      | Path to MPI hostfile that contains the private IPs of all nodes of the cluster. If ran on AWS this file will be `hosts_address`, discussed above. If ran locally this file can be a plain txt with content `localhost:{n+1}`. |
 | `lr` | Inital learning rate. |
 | `momentum` | Value of momentum. |
 | `network` | Deep neural net: `LeNet`,`ResNet18`,`ResNet34`,`ResNet50`,`DenseNet`,`VGG11` or `VGG13`. |
 | `dataset` | Data set: `MNIST`, `Cifar10`, `SVHN` or `Cifar100`. |
 | `batch-size` | Batchsize: equal to b in ByzShield, equal to br/K in DETOX, equal to b/K in vanilla batch-SGD (baseline). |
-| `mode` | Robust aggregation method: `coord-median`, `bulyan`, `multi-krum` or `sign-sgd` |
-| `approach` | Distributed learning scheme `baseline` (vanilla), `mols` (proposed MOLS), `rama_one` (proposed Ramanujan Case 1), `rama_two` (proposed Ramanujan Case 2), `draco-lite` (DETOX), `draco_lite_attack` (our attack on DETOX), `maj_vote` |
+| `mode` | Robust aggregation method: `coord-median`, `bulyan`, `multi-krum` or `sign-sgd`. |
+| `approach` | Distributed learning scheme `baseline` (vanilla), `mols` (proposed MOLS), `rama_one` (proposed Ramanujan Case 1), `rama_two` (proposed Ramanujan Case 2), `draco-lite` (DETOX), `draco_lite_attack` (our attack on DETOX), `maj_vote`. |
 | `eval-freq` | Frequency of iterations to backup trained model (for evaluation). |
-| `err-mode` | Byzantine attack to simulate: `rev_grad` (reversed gradient) or `constant` (constant gradient), refer to `src/model_ops/utily.py` for details |
+| `err-mode` | Byzantine attack to simulate: `rev_grad` (reversed gradient) or `constant` (constant gradient), refer to `src/model_ops/utily.py` for details. |
 | `epochs` | Number of epochs to train. |
 | `max-steps` | Total number of iterations (across all epochs). |
 | `worker-fail` | Number of Byzantine workers, equal to *q* in paper. |
@@ -188,8 +188,8 @@ The training algorithm should be run by the PS instance executing file `run_pyto
 | `train-dir` | Directory to save model backups for evaluation (for AWS this should be the EFS folder). |
 | `local-remote` | `local` (for local training) or `remote` (for training on AWS). |
 | `rama-m` | Value of *m* (in paper), only needed for Ramanujan Case 2. |
-| `detox-attack` | Our attack on DETOX (see `--approach`): `worst` (optimally attacks majority within groups), `benign` or `whole_group`  |
-| `byzantine-gen` | Type of byzantine set generation (`random` (random for each iteration) or `hard_coded` (fixed for all iterations and set in `util.py`)) |
+| `detox-attack` | Our attack on DETOX (see `--approach`): `worst` (optimally attacks majority within groups), `benign` or `whole_group`.  |
+| `byzantine-gen` | Type of byzantine set generation (`random` (random for each iteration) or `hard_coded` (fixed for all iterations and set in `util.py`)). |
 
 To initiate training, from the PS run:
 ```sh
@@ -197,10 +197,19 @@ bash ./src/run_pytorch.sh
 ```
 
 ## Testing
-By convention worker 1 will fetch the model from the shared EFS folder and evaluate it. To achieve this, from the PS, run:
+By convention, worker 1 will fetch the model from the shared EFS folder and evaluate it. To achieve this, from the PS, run:
 ```sh
 bash ./src/evaluate_pytorch.sh
 ```
+
+The basic arguments of this script along with all possible values are below.
+| Argument                      | Values/description                                 |
+| ----------------------------- | ---------------------------------------- |
+| `eval-batch-size` | Number of samples to iteratively evaluate model on. |
+| `eval-freq` | Set to the same value as `eval-freq` used for training in `run_pytorch.sh`. |
+| `network` | Deep neural net: `LeNet`,`ResNet18`,`ResNet34`,`ResNet50`,`DenseNet`,`VGG11` or `VGG13`. |
+| `dataset` | Data set: `MNIST`, `Cifar10`, `SVHN` or `Cifar100`. |
+| `model-dir` | Set to the same value as `train-dir` used for training in `run_pytorch.sh`. |
 
 [DETOX]: <https://github.com/hwang595/DETOX>
 [Install]: <https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html>
