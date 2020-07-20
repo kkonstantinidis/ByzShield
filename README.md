@@ -132,10 +132,31 @@ Next, use the chmod command to make sure your private key file isn't publicly vi
 chmod 400 {xxxxxx}.pem
 ```
 
-Now, from the local machine and the Python 2 envirnoment `byzshield_local_python2`, launch replicas of the AMI (those will be the PS and worker instances) running
+Now, from the local machine and the Python 2 envirnoment `byzshield_local_python2`, launch replicas of the AMI (those will be the PS and worker instances) running the following:
 ```sh
 conda activate byzshield_local_python2
-python pytorch_ec2.py launch
+python ./tools/pytorch_ec2.py launch
+```
+
+Wait for the command to finish so that all instances are ready. Then, run the following command to generate a file `hosts_address` with the private IPs of all instances. The first line of the file is the IP of the PS (this will also be printed on the terminal):
+```sh
+python ./tools/pytorch_ec2.py get_hosts
+```
+
+Use the private IP of the PS fetched above to do some SSH configuration and copy the project files to the PS:
+```sh
+bash ./tools/local_script.sh {private IP of the PS}
+```
+
+SSH into the PS, the rest of the commands will be executed there:
+```sh
+ssh -i  {your AWS private key file with the .pem extenion} ubuntu@{private IP of the PS}
+```
+
+## Data set preparation
+On the PS, run the `remote_script.sh` will configure the SSH and copy the project files to the workers:
+```sh
+bash ./tools/remote_script.sh
 ```
 
 ## Training
