@@ -17,7 +17,7 @@ The first steps we need to do before installing the required packages are
 | ------ | ------ | ------ | ------ |
 | All traffic | All | 0-65535 | Anywhere |
 
-Create a security group ([instructions][security_group_create]) with the above settings and give it a name, e.g., `byzshield_security_group`. We will use it later.
+Create a security group ([instructions][security_group_create]) with the above settings and give it a name, e.g., `byzshield_security_group`. We will also use it later.
 
 ## Prerequisites/Anaconda installation (both local and remote)
 ```sh
