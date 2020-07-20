@@ -154,7 +154,12 @@ ssh -i  {your AWS private key file with the .pem extenion} ubuntu@{private IP of
 ```
 
 ## Data set preparation
-On the PS, run the `remote_script.sh` will configure the SSH and copy the project files to the workers:
+On the PS, download, split and normalize the MNIST/Cifar10/SVHN/Cifar100 data sets:
+```sh
+bash ./src/data_prepare.sh
+```
+
+On the PS, run the `remote_script.sh` will configure the SSH and copy the project files and data sets to the workers:
 ```sh
 bash ./tools/remote_script.sh
 ```
