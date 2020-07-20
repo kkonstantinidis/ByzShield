@@ -132,6 +132,11 @@ Next, use the chmod command to make sure your private key file isn't publicly vi
 chmod 400 {xxxxxx}.pem
 ```
 
+Now, launch replicas of the AMI (those will be the PS and worker instances) running
+```sh
+python pytorch_ec2.py launch
+```
+
 ## Training
 The training algorithm should be run by the PS instance executing file `run_pytorch.sh`. The basic arguments of this script along with all possible values are below. This is not an exhaustive list of all arguments but only the basic ones, the remaining can be left to their default values in `run_pytorch.sh`.
 
