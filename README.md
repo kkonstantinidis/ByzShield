@@ -191,6 +191,17 @@ The training algorithm should be run by the PS instance executing file `run_pyto
 | `detox-attack` | Our attack on DETOX (see `--approach`): `worst` (optimally attacks majority within groups), `benign` or `whole_group`  |
 | `byzantine-gen` | Type of byzantine set generation (`random` (random for each iteration) or `hard_coded` (fixed for all iterations and set in `util.py`)) |
 
+To initiate training, from the PS run:
+```sh
+bash ./src/run_pytorch.sh
+```
+
+## Testing
+By convention worker 1 will fetch the model from the shared EFS folder and evaluate it. To achieve this, from the PS, run:
+```sh
+bash ./src/evaluate_pytorch.sh
+```
+
 [DETOX]: <https://github.com/hwang595/DETOX>
 [Install]: <https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html>
 [configure]: <https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html>
