@@ -212,6 +212,7 @@ The basic arguments of this script along with all possible values are below.
 | `model-dir` | Set to the same value as `train-dir` used for training in `run_pytorch.sh`. |
 
 ## Citation
+```
 @inproceedings{konstantinidis_ramamoorthy_byzshield,
 title = {ByzShield: An Efficient and Robust System for Distributed Training},
 author = {Konstantinos Konstantinidis and Aditya Ramamoorthy},
@@ -219,6 +220,7 @@ year = {2020},
 month = {September},
 url = {https://arxiv.org/pdf/}}
 }
+```
 
 [DETOX]: <https://github.com/hwang595/DETOX>
 [Install]: <https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html>
