@@ -206,7 +206,7 @@ The basic arguments of this script along with all possible values are below.
 | Argument                      | Values/description                                 |
 | ----------------------------- | ---------------------------------------- |
 | `eval-batch-size` | Number of samples to iteratively evaluate model on. |
-| `eval-freq` | Set to the same value as `eval-freq` used for training in `run_pytorch.sh`. |
+| `eval-freq` | Set to the same value as `eval-freq` used for training in `run_pytorch.sh` (any multiple of it will also work). |
 | `network` | Deep neural net: `LeNet`,`ResNet18`,`ResNet34`,`ResNet50`,`DenseNet`,`VGG11` or `VGG13`. |
 | `dataset` | Data set: `MNIST`, `Cifar10`, `SVHN` or `Cifar100`. |
 | `model-dir` | Set to the same value as `train-dir` used for training in `run_pytorch.sh`. |
