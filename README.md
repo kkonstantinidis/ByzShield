@@ -153,7 +153,7 @@ SSH into the PS, the rest of the commands will be executed there:
 ssh -i  {your AWS private key file with the .pem extenion} ubuntu@{private IP of the PS}
 ```
 
-## Data set preparation
+## Data set and worker preparation
 On the PS, download, split and normalize the MNIST/Cifar10/SVHN/Cifar100 data sets:
 ```sh
 bash ./src/data_prepare.sh
