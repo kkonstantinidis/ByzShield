@@ -132,8 +132,9 @@ Next, use the chmod command to make sure your private key file isn't publicly vi
 chmod 400 {xxxxxx}.pem
 ```
 
-Now, launch replicas of the AMI (those will be the PS and worker instances) running
+Now, from the local machine and the Python 2 envirnoment `byzshield_local_python2`, launch replicas of the AMI (those will be the PS and worker instances) running
 ```sh
+conda activate byzshield_local_python2
 python pytorch_ec2.py launch
 ```
 
