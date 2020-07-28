@@ -65,10 +65,10 @@ conda activate byzshield_local_python2
 conda install pip
 python -m pip install --upgrade pip
 pip install --upgrade setuptools
-conda install -c conda-forge python-blosc
-conda install -c anaconda joblib
-conda install -c anaconda paramiko
-conda install -c anaconda boto3
+conda install -y -c conda-forge python-blosc
+conda install -y -c anaconda joblib
+conda install -y -c anaconda paramiko
+conda install -y -c anaconda boto3
 ```
 
 The exact series of commands for the *remote* machine is
@@ -78,15 +78,15 @@ conda activate byzshield
 conda install pip
 python -m pip install --upgrade pip
 pip install --upgrade setuptools
-conda install pytorch==1.0.1 torchvision cpuonly -c pytorch
-conda install -c anaconda python-blosc
-conda install -c anaconda joblib
-conda install -c anaconda paramiko
-conda install -c anaconda boto3
-conda install -c anaconda libgcc
-conda install -c anaconda pandas
-conda install -c anaconda scipy
-conda install -c anaconda mpi4py
+conda install -y pytorch==1.0.1 torchvision cpuonly -c pytorch
+conda install -y -c anaconda python-blosc
+conda install -y -c anaconda joblib
+conda install -y -c anaconda paramiko
+conda install -y -c anaconda boto3
+conda install -y -c anaconda libgcc
+conda install -y -c anaconda pandas
+conda install -y -c anaconda scipy
+conda install -y -c anaconda mpi4py
 
 # Install hdmedians
 sudo apt-get install gcc && sudo apt-get install git
