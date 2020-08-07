@@ -127,6 +127,8 @@ cfg = Cfg({
 })
 ```
 
+Note: In above configuration, make sure that the chosen instance types `master_type` and `worker_type` are available in the selected AWS region (`region`) and availability zone (`availability_zone`).
+
 Next, use the chmod command to make sure your private key file isn't publicly viewable:
 ```sh
 chmod 400 {xxxxxx}.pem
