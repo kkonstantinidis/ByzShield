@@ -35,7 +35,7 @@ bash Anaconda3-2020.02-Linux-x86_64.sh
 # Apply the changes immediately so that you don't have to reboot/relogin
 . .bashrc
 
-# To disable each shell session having the base environment auto-activated
+# To disable each shell session having the base environment auto-activated (optional)
 conda config --set auto_activate_base False
 ```
 
