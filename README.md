@@ -152,7 +152,7 @@ bash ./tools/local_script.sh {private IP of the PS}
 
 SSH into the PS, the rest of the commands will be executed there:
 ```sh
-ssh -i  {your AWS private key file with the .pem extenion} ubuntu@{private IP of the PS}
+ssh -i  {Your AWS private key file with the .pem extenion} ubuntu@{private IP of the PS}
 ```
 
 ## Data set and worker preparation
