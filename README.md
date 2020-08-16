@@ -122,12 +122,13 @@ cfg = Cfg({
     "spot_price" : "{Dollar amount per machine per hour at least max(price of PS, price of worker), e.g., 3.5}", # float
     "path_to_keyfile" : "{Your AWS private key file with the .pem extenion, like xxxxxx.pem}",                   # string
     "nfs_ip_address" : "{IP address of the EFS xxx.xxx.xxx.xxx}",                                                # string
-    "nfs_mount_point" : "{Path to EFS folder named "shared", e.g., /home/ubuntu/shared}",                        # string
+    "nfs_mount_point" : "{Path to EFS folder named "shared", set to /home/ubuntu/shared}",                       # string
     "security_group": ["{Name of the AWS security group, mentioned before as byzshield_security_group}"],        # string
 })
 ```
+**Note**: The data sets will be downloaded from the PS to the EFS folder and then fetched from all machines from there. For this to work, the EFS folder needs to be named `shared` and located at the home directory `~`. Since `~` is same as `/home/ubuntu` for AWS Ubuntu instances, you need to set the EFS folder above to be `~/shared` or `/home/ubuntu/shared`.
 
-Note: In above configuration, make sure that the chosen instance types `master_type` and `worker_type` are available in the selected AWS region (`region`) and availability zone (`availability_zone`).
+**Note**: In above configuration, make sure that the chosen instance types `master_type` and `worker_type` are available in the selected AWS region (`region`) and availability zone (`availability_zone`).
 
 Next, use the chmod command to make sure your private key file isn't publicly viewable:
 ```sh
@@ -162,14 +163,13 @@ bash ./src/data_prepare.sh
 ```
 **Note**: This requires `sudo` permissions to save data sets to the EFS folder. Since `sudo` uses a different path than your typical environment, you need to be specify that you want to use the Anaconda Python 3 environment we created before rather than the system `python`. To do that make sure that `data_prepare.sh` points to that environment
 ```sh
-sudo {Path to Anaconda Python 3 environment, e.g., /home/ubuntu/anaconda3/envs/byzshield/bin/python} ./datasets/data_prepare.py
+sudo {Path to Anaconda Python 3 environment "python" file, e.g., /home/ubuntu/anaconda3/envs/byzshield/bin/python} ./datasets/data_prepare.py
 ```
 
 On the PS, run the `remote_script.sh` to configure the SSH and copy the project files and data sets to the workers:
 ```sh
 bash ./tools/remote_script.sh
 ```
-**Note**: The above command won't copy the data sets to the workers. Those will be fetched from all machines from the EFS folder. For this to work, the EFS folder and the project folder `BYZSHIELD` need to be in the same directory. Since the project is stored by `local_script.sh` in `~/BYZSHIELD` which is `/home/ubuntu/shared` for AWS Ubuntu instances, then you need to set the EFS folder to be `~/shared` or `/home/ubuntu/shared`. For that, see previous section on configuring file `pytorch_ec2.py`. 
 
 ## Training
 The training algorithm should be run by the PS instance executing file `run_pytorch.sh`. The basic arguments of this script along with all possible values are below. This is not an exhaustive list of all arguments but only the basic ones, the remaining can be left to their default values in `run_pytorch.sh`.
