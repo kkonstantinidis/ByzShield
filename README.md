@@ -160,6 +160,10 @@ On the PS, download, split and normalize the MNIST/Cifar10/SVHN/Cifar100 data se
 ```sh
 bash ./src/data_prepare.sh
 ```
+**Note**: This requires `sudo` permissions to save data sets to the EFS folder. Since `sudo` uses a different path than your typical environment, you need to be specify that you want to use the Anaconda Python 3 environment we created before rather than the system `python`. To do that make sure that `data_prepare.sh` points to that environment
+```sh
+sudo {Path to Anaconda Python 3 BYZSHIELD environment, e.g., /home/ubuntu/anaconda3/envs/byzshield/bin/python} ./datasets/data_prepare.py
+```
 
 On the PS, run the `remote_script.sh` to configure the SSH and copy the project files and data sets to the workers:
 ```sh
