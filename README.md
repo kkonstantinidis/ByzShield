@@ -159,7 +159,7 @@ ssh -i  {Your AWS private key file with the .pem extenion} ubuntu@{private IP of
 ## Data set and worker preparation
 On the PS, download, split and normalize the MNIST/Cifar10/SVHN/Cifar100 data sets:
 ```sh
-bash ./src/data_prepare.sh
+conda activate byzshield && bash ./src/data_prepare.sh
 ```
 **Note**: This requires `sudo` permissions to save data sets to the EFS folder. Since `sudo` uses a different path than your typical environment, you need to specify that you want to use the Anaconda Python 3 environment we created before rather than the system `python`. To do that make sure that `data_prepare.sh` points to that environment
 ```sh
