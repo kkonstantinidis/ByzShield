@@ -89,7 +89,7 @@ The exact series of commands for the *remote* machine is
 >>conda install -y -c anaconda mpi4py
 
 # Install hdmedians
->>>>sudo apt-get install gcc && sudo apt-get install git
+>>sudo apt-get install gcc && sudo apt-get install git
 >>git clone https://github.com/daleroberts/hdmedians.git
 >>cd hdmedians
 >>python setup.py install
