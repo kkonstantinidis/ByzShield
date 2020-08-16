@@ -165,7 +165,7 @@ On the PS, run the `remote_script.sh` to configure the SSH and copy the project 
 ```sh
 bash ./tools/remote_script.sh
 ```
-**Note**: The above command won't copy the data sets to the workers. Those will be fetched from all machines from the EFS folder. For this to work, the EFS folder and the project folder `BYZSHIELD` need to be in the same directory. Since the project is stored by `local_script.sh` in `~/BYZSHIELD` which is `/home/ubuntu/shared` for AWS Ubuntu instances, then you need to set the EFS folder to be `~/shared` or `/home/ubuntu/shared`. 
+**Note**: The above command won't copy the data sets to the workers. Those will be fetched from all machines from the EFS folder. For this to work, the EFS folder and the project folder `BYZSHIELD` need to be in the same directory. Since the project is stored by `local_script.sh` in `~/BYZSHIELD` which is `/home/ubuntu/shared` for AWS Ubuntu instances, then you need to set the EFS folder to be `~/shared` or `/home/ubuntu/shared`. For that, see previous section on configuring file `pytorch_ec2.py`. 
 
 ## Training
 The training algorithm should be run by the PS instance executing file `run_pytorch.sh`. The basic arguments of this script along with all possible values are below. This is not an exhaustive list of all arguments but only the basic ones, the remaining can be left to their default values in `run_pytorch.sh`.
