@@ -21,22 +21,22 @@ Create a security group ([instructions][security_group_create]) with the above s
 
 ## Prerequisites/Anaconda installation (both local and remote)
 ```sh
->>sudo apt-get update && sudo apt-get upgrade
+sudo apt-get update && sudo apt-get upgrade
 
 # Find the latest Anaconda version from https://www.anaconda.com/products/individual (tested with 2020.02) and download
->>cd ~ && sudo apt-get install curl && curl -O https://repo.anaconda.com/archive/Anaconda3-2020.02-Linux-x86_64.sh
+cd ~ && sudo apt-get install curl && curl -O https://repo.anaconda.com/archive/Anaconda3-2020.02-Linux-x86_64.sh
 
 # Install Anaconda (press Enter multiple times until the license aggreement asks you to type 'yes' and press Enter)
->>bash Anaconda3-2020.02-Linux-x86_64.sh
+bash Anaconda3-2020.02-Linux-x86_64.sh
 
 # Press Enter to install in default location...
 # Type 'yes' and press Enter to the prompt of the installer
 # "Do you wish the installer to initialize Anaconda3 by running conda init?"...
 # Apply the changes immediately so that you don't have to reboot/relogin
->>. .bashrc
+. .bashrc
 
 # To disable each shell session having the base environment auto-activated (optional)
->>conda config --set auto_activate_base False
+conda config --set auto_activate_base False
 ```
 
 ## Anaconda environments
@@ -60,39 +60,39 @@ The tested dependencies versions for the local/remote machines are given next:
 
 The exact series of commands for the *local* machine is
 ```sh
->>conda create -n byzshield_local_python2 python=2.7
->>conda activate byzshield_local_python2
->>conda install pip
->>python -m pip install --upgrade pip
->>pip install --upgrade setuptools
->>conda install -y -c conda-forge python-blosc
->>conda install -y -c anaconda joblib
->>conda install -y -c anaconda paramiko
->>conda install -y -c anaconda boto3
+conda create -n byzshield_local_python2 python=2.7
+conda activate byzshield_local_python2
+conda install pip
+python -m pip install --upgrade pip
+pip install --upgrade setuptools
+conda install -y -c conda-forge python-blosc
+conda install -y -c anaconda joblib
+conda install -y -c anaconda paramiko
+conda install -y -c anaconda boto3
 ```
 
 The exact series of commands for the *remote* machine is
 ```sh
->>conda create -n byzshield python=3.7
->>conda activate byzshield
->>conda install pip
->>python -m pip install --upgrade pip
->>pip install --upgrade setuptools
->>conda install -y pytorch==1.0.1 torchvision cpuonly -c pytorch
->>conda install -y -c anaconda python-blosc
->>conda install -y -c anaconda joblib
->>conda install -y -c anaconda paramiko
->>conda install -y -c anaconda boto3
->>conda install -y -c anaconda libgcc
->>conda install -y -c anaconda pandas
->>conda install -y -c anaconda scipy
->>conda install -y -c anaconda mpi4py
+conda create -n byzshield python=3.7
+conda activate byzshield
+conda install pip
+python -m pip install --upgrade pip
+pip install --upgrade setuptools
+conda install -y pytorch==1.0.1 torchvision cpuonly -c pytorch
+conda install -y -c anaconda python-blosc
+conda install -y -c anaconda joblib
+conda install -y -c anaconda paramiko
+conda install -y -c anaconda boto3
+conda install -y -c anaconda libgcc
+conda install -y -c anaconda pandas
+conda install -y -c anaconda scipy
+conda install -y -c anaconda mpi4py
 
 # Install hdmedians
->>sudo apt-get install gcc && sudo apt-get install git
->>git clone https://github.com/daleroberts/hdmedians.git
->>cd hdmedians
->>python setup.py install
+sudo apt-get install gcc && sudo apt-get install git
+git clone https://github.com/daleroberts/hdmedians.git
+cd hdmedians
+python setup.py install
 ```
 
 # Job launching
@@ -132,43 +132,43 @@ cfg = Cfg({
 
 Next, use the chmod command to make sure your private key file isn't publicly viewable:
 ```sh
->>chmod 400 {xxxxxx}.pem
+chmod 400 {xxxxxx}.pem
 ```
 
 Now, from the local machine and the Python 2 envirnoment `byzshield_local_python2`, launch replicas of the AMI (those will be the PS and worker instances) running the following:
 ```sh
->>conda activate byzshield_local_python2
->>python ./tools/pytorch_ec2.py launch
+conda activate byzshield_local_python2
+python ./tools/pytorch_ec2.py launch
 ```
 
 Wait for the command to finish so that all instances are ready. Then, run the following command to generate a file `hosts_address` with the private IPs of all instances. The first line of the file is the IP of the PS (this will also be printed on the terminal):
 ```sh
->>python ./tools/pytorch_ec2.py get_hosts
+python ./tools/pytorch_ec2.py get_hosts
 ```
 
 Use the private IP of the PS fetched above to do some SSH configuration and copy the project files to the PS:
 ```sh
->>bash ./tools/local_script.sh {private IP of the PS}
+bash ./tools/local_script.sh {private IP of the PS}
 ```
 
 SSH into the PS, the rest of the commands will be executed there:
 ```sh
->>ssh -i  {Your AWS private key file with the .pem extenion} ubuntu@{private IP of the PS}
+ssh -i  {Your AWS private key file with the .pem extenion} ubuntu@{private IP of the PS}
 ```
 
 ## Data set and worker preparation
 On the PS, download, split and normalize the MNIST/Cifar10/SVHN/Cifar100 data sets:
 ```sh
->>conda activate byzshield && bash ./src/data_prepare.sh
+conda activate byzshield && bash ./src/data_prepare.sh
 ```
 **Note**: This requires `sudo` permissions to save data sets to the EFS folder. Since `sudo` uses a different path than your typical environment, you need to specify that you want to use the Anaconda Python 3 environment we created before rather than the system `python`. To do that make sure that `data_prepare.sh` points to that environment
-```sh
+```
 sudo {Path to Anaconda "python" file, e.g., /home/ubuntu/anaconda3/envs/byzshield/bin/python} ./datasets/data_prepare.py
 ```
 
 On the PS, run the `remote_script.sh` to configure the SSH and copy the project files and data sets to the workers:
 ```sh
->>bash ./tools/remote_script.sh
+bash ./tools/remote_script.sh
 ```
 
 ## Training
@@ -200,13 +200,13 @@ The training algorithm should be run by the PS instance executing file `run_pyto
 
 To initiate training, from the PS run:
 ```sh
->>bash ./src/run_pytorch.sh
+bash ./src/run_pytorch.sh
 ```
 
 ## Testing
 By convention, worker 1 will fetch the model from the shared EFS folder and evaluate it. To achieve this, from the PS, run:
 ```sh
->>bash ./src/evaluate_pytorch.sh
+bash ./src/evaluate_pytorch.sh
 ```
 
 The basic arguments of this script along with all possible values are below.
