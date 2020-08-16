@@ -163,7 +163,7 @@ bash ./src/data_prepare.sh
 ```
 **Note**: This requires `sudo` permissions to save data sets to the EFS folder. Since `sudo` uses a different path than your typical environment, you need to specify that you want to use the Anaconda Python 3 environment we created before rather than the system `python`. To do that make sure that `data_prepare.sh` points to that environment
 ```sh
-sudo {Path to Anaconda Python 3 environment "python" file, e.g., /home/ubuntu/anaconda3/envs/byzshield/bin/python} ./datasets/data_prepare.py
+sudo {Path to Anaconda environment's "python" file, e.g., /home/ubuntu/anaconda3/envs/byzshield/bin/python} ./datasets/data_prepare.py
 ```
 
 On the PS, run the `remote_script.sh` to configure the SSH and copy the project files and data sets to the workers:
