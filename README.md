@@ -197,16 +197,18 @@ The training algorithm should be run by the PS instance executing file `run_pyto
 | `rama-m` | Value of *m* (in paper), only needed for Ramanujan Case 2. |
 | `detox-attack` | Our attack on DETOX (see `--approach`): `worst` (optimally attacks majority within groups), `benign` or `whole_group`.  |
 | `byzantine-gen` | Type of byzantine set generation (`random` (random for each iteration) or `hard_coded` (fixed for all iterations and set in `util.py`)). This won't affect `draco_lite_attack`. |
+| `gamma` | Learning rate decay (linear). |
+| `lr-step` | Frequency of learning rate decay (measured in number of iterations). |
 
 To initiate training, from the PS run:
 ```sh
-bash ./src/run_pytorch.sh
+bash ./src/run_pytorch.sh 1
 ```
 
 ## Testing
-By convention, worker 1 will fetch the model from the shared EFS folder and evaluate it. To achieve this, from the PS, run:
+By convention, worker 1 will fetch the model from the shared EFS folder and evaluate it. To achieve this, from the PS, run (for the definitions of `q`, `lr` and `gamma` see above, they should match the values used for training):
 ```sh
-bash ./src/evaluate_pytorch.sh
+bash ./src/evaluate_pytorch.sh 1 ${q} ${lr} ${gamma}
 ```
 
 The basic arguments of this script along with all possible values are below.
