@@ -208,7 +208,7 @@ bash ./src/run_pytorch.sh 1
 ## Testing
 By convention, worker 1 will fetch the model from the shared EFS folder and evaluate it. To achieve this, from the PS, run (for the definitions of `q`, `lr` and `gamma` see above, they should match the values used for training):
 ```sh
-bash ./src/evaluate_pytorch.sh 1 ${q} ${lr} ${gamma}
+bash ./src/evaluate_pytorch.sh 1 {q} {lr} {gamma}
 ```
 
 The basic arguments of this script along with all possible values are below.
