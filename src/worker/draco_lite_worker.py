@@ -107,10 +107,10 @@ class DracoLiteWorker(DistributedWorker):
             # after each epoch we need to make sure workers in the same group re-shuffling using the same seed
             
             # ~ test
-            torch.manual_seed(428)
+            # torch.manual_seed(428)
             # torch.manual_seed(self._group_num) # ~ ONLY TEMPORARY, USE THE ONE BELOW
             
-            # torch.manual_seed(self._group_seeds[self._group_num]+num_epoch) # ~ the +num_epoch is not necessary it's just so that they don't get the exact same data at each epoch
+            torch.manual_seed(self._group_seeds[self._group_num]+num_epoch) # ~ the +num_epoch is not necessary it's just so that they don't get the exact same data at each epoch
             
             # ~ test
             # logger.info("DEBUG_W_DETOX: torch.manual_seed: {}".format(self._group_seeds[self._group_num]+num_epoch))

@@ -196,7 +196,7 @@ class SyncReplicasMaster_NN(NN_Trainer):
             self.cur_step += 1
             
             # ~ test
-            break
+            # break
 
     def init_model_shapes(self):
         self._model_param_counter = 0

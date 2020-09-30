@@ -244,7 +244,7 @@ class DracoLiteMaster(SyncReplicasMaster_NN):
             self.cur_step += 1
             
             # ~ test
-            break
+            # break
 
     # ~ just stores each received gradient in self._coded_grads_buffer
     def aggregate_gradient(self, gradient, layer_idx, source):
@@ -603,7 +603,7 @@ class DracoLiteMaster(SyncReplicasMaster_NN):
                 # if k == 0: # ~ k-th group
                 # np.save('DETOX_draco_lite_aggregation_buffer_groupInd_'+str(k)+'_lay'+str(j), _maj_grad)
                         
-                # ~ Kostas test, remove this
+                # ~ X test, remove this
                 # assert 0 == 1
                 
                 try:

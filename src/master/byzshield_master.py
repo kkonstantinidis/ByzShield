@@ -276,7 +276,7 @@ class ByzshieldMaster(SyncReplicasMaster_NN): # ~ check if you can make it subcl
             self.cur_step += 1
             
             # ~ test
-            break
+            # break
 
     # ~ just stores each received gradient in self._coded_grads_buffer
     # Arguments:
