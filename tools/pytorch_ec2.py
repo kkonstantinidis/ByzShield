@@ -259,7 +259,7 @@ def mxnet_ec2_run(argv, configuration):
         client.set_missing_host_key_policy(pm.AutoAddPolicy())
         
         # test
-        # print("KOSTAS", configuration["ssh_username"], configuration["path_to_keyfile"])
+        # print("X", configuration["ssh_username"], configuration["path_to_keyfile"])
         
         client.connect(host, username=configuration["ssh_username"], key_filename=configuration["path_to_keyfile"])
         return client

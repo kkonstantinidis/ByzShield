@@ -20,7 +20,7 @@ ssh-add ${KEY_PEM_NAME}
 # ~ -t: algorithm
 # -b: key size
 # -c: comment, changes the comment for a keyfile
-ssh-keygen -t rsa -b 4096 -C "kostas@iastate.edu"
+ssh-keygen -t rsa -b 4096 -C "X@X"
 
 # ~ copies code to all workers
 for i in $(seq 2 $DEEPLEARNING_WORKERS_COUNT);

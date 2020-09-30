@@ -120,7 +120,7 @@ done
 
 
 # for local DETOX
-# mpirun -n 16 --hostfile "/home/kostas/Dropbox/Python Workspace/SGD/BYZSHIELD/tools/hosts_address_local" \
+# mpirun -n 16 --hostfile "/home/X/Dropbox/Python Workspace/SGD/BYZSHIELD/tools/hosts_address_local" \
 # python distributed_nn.py \
 # --lr=0.001 \
 # --momentum=0.9 \
@@ -141,7 +141,7 @@ done
 # --bucket-size=5 \
 # --checkpoint-step=0 \
 # --lis-simulation=simulate \
-# --train-dir=/home/kostas/shared/ \
+# --train-dir=/home/X/shared/ \
 # --local-remote=local \
 # --rama-m=5 \
 # --byzantine-gen=hard_coded \
@@ -149,7 +149,7 @@ done
 
 
 # for local BYZSHIELD
-# mpirun -n 16 --hostfile "/home/kostas/Dropbox/Python Workspace/SGD/BYZSHIELD/tools/hosts_address_local" \
+# mpirun -n 16 --hostfile "/home/X/Dropbox/Python Workspace/SGD/BYZSHIELD/tools/hosts_address_local" \
 # python distributed_nn.py \
 # --lr=0.001 \
 # --momentum=0.9 \
@@ -170,7 +170,7 @@ done
 # --bucket-size=25 \
 # --checkpoint-step=0 \
 # --lis-simulation=simulate \
-# --train-dir=/home/kostas/shared/ \
+# --train-dir=/home/X/shared/ \
 # --local-remote=local \
 # --rama-m=5 \
 # --byzantine-gen=hard_coded \
