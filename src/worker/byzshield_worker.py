@@ -118,9 +118,9 @@ class ByzshieldWorker(DistributedWorker):
             # torch.manual_seed(42+num_epoch)
             
             # ~ test
-            # torch.manual_seed(428)
+            torch.manual_seed(428)
             
-            torch.manual_seed(self.seeds[num_epoch]+num_epoch)
+            # torch.manual_seed(self.seeds[num_epoch]+num_epoch)
             
             # ~test
             # logger.info("DEBUG_W_BYZ: torch.manual_seed: {}".format(self.seeds[num_epoch]+num_epoch))

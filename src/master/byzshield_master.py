@@ -90,6 +90,8 @@ class ByzshieldMaster(SyncReplicasMaster_NN): # ~ check if you can make it subcl
         self._fail_workers = kwargs['adversaries'] # ~ the same set of Byzantines will be used in ALIE (not a new random one)
         
         self._c_q_max = kwargs['c_q_max'] # ~ maximum no. of distorted files after majority voting (currently hard-coded)
+        
+        self._err_mode = kwargs['err_mode']
 
     def build_model(self):
         # ~ test
@@ -228,7 +230,9 @@ class ByzshieldMaster(SyncReplicasMaster_NN): # ~ check if you can make it subcl
             ################### "A Little is enough" attack simulation on the PS"#########################
             if self._lis_simulation == "simulate":
                 self._LIE_attack_simulation()
-            else:
+            elif self._err_mode == "foe":
+                self._FoE_attack_simulation()
+            else: # ~ the rest of the attacks are simulated at the worker level
                 pass  
 
             # ~ test
@@ -272,7 +276,7 @@ class ByzshieldMaster(SyncReplicasMaster_NN): # ~ check if you can make it subcl
             self.cur_step += 1
             
             # ~ test
-            # break
+            break
 
     # ~ just stores each received gradient in self._coded_grads_buffer
     # Arguments:
@@ -662,3 +666,44 @@ class ByzshieldMaster(SyncReplicasMaster_NN): # ~ check if you can make it subcl
                         _relative_index_in_group = self._group_list[k].index(adv_index)
                         assert self._coded_grads_buffer[k][_relative_index_in_group][j].shape == _mal_grad.shape
                         self._coded_grads_buffer[k][_relative_index_in_group][j] =  mu + self.__z * sigma
+
+
+    # ~ Fall of Empires attack
+    def _FoE_attack_simulation(self):
+        """
+        Simulating the attack method in: https://arxiv.org/abs/1903.03936
+        Fall of Empires: Breaking Byzantine-tolerant SGD by Inner Product Manipulation
+        """
+        # dummpy_adversarial_nodes = np.random.choice(self.num_workers, self._s, replace=False)
+        
+        # ~ option 2: choice of Byzantines won't change for FoE
+        dummpy_adversarial_nodes = self._fail_workers[self.cur_step]
+        
+        # ~ test
+        # logger.info("DEBUG_PS_BYZ: FoE byzantines: {}".format(dummpy_adversarial_nodes))
+        
+        for j, _ in enumerate(self.network.parameters()):
+            tempt_grads = []
+            for k, v in self._coded_grads_buffer.items():
+                for i, elem in enumerate(v):
+                    if self._group_list[k][i] not in dummpy_adversarial_nodes:
+                        tempt_grads.append(elem[j])
+                        
+            # minimum, maximum, mu = np.amin(tempt_grads, axis=0), np.amax(tempt_grads, axis=0), np.mean(tempt_grads, axis=0)
+            mu = np.mean(tempt_grads, axis=0)
+            
+            # ~ test
+            # logger.info("DEBUG_PS_BYZ: FoE tempt_grads, mu: {} {}".format(np.shape(tempt_grads), np.shape(mu)))
+            
+            # OFFSET = 100
+            FACTOR = 100
+            for adv_index in dummpy_adversarial_nodes:
+                for k, v in self._coded_grads_buffer.items():
+                    if adv_index in self._group_list[k]:
+                        # _mal_grad = v
+                        # _mal_grad[mu > 0] = minimum[mu > 0] #- OFFSET*np.ones(np.shape(_mal_grad[mu > 0]))
+                        # _mal_grad[mu <= 0] = maximum[mu <= 0] #+ OFFSET*np.ones(np.shape(_mal_grad[mu > 0]))
+                        _mal_grad = -FACTOR*mu
+                        _relative_index_in_group = self._group_list[k].index(adv_index)
+                        assert self._coded_grads_buffer[k][_relative_index_in_group][j].shape == _mal_grad.shape
+                        self._coded_grads_buffer[k][_relative_index_in_group][j] = _mal_grad

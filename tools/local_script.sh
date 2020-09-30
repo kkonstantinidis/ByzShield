@@ -11,7 +11,7 @@ ssh -o "StrictHostKeyChecking no" ubuntu@${PUB_IP_ADDR}
 
 scp -i ${KEY_PEM_DIR} ${KEY_PEM_DIR} ubuntu@${PUB_IP_ADDR}:~/.ssh
 scp -i ${KEY_PEM_DIR} hosts hosts_address config ubuntu@${PUB_IP_ADDR}:~/
-# scp -i ${KEY_PEM_DIR} -r "/home/X/Dropbox/Python Workspace/SGD/BYZSHIELD" ubuntu@${PUB_IP_ADDR}:~/
+# scp -i ${KEY_PEM_DIR} -r "/home/kostas/Dropbox/Python Workspace/SGD/BYZSHIELD" ubuntu@${PUB_IP_ADDR}:~/
 # ~ sync left-to-right only changed files and ignores __pycache__ and MNIST/CIFAR10/SVHN/CIFAR1000 data folders, either training or testing, need to escape spaces
 rsync -avzh -e "ssh -i ${KEY_PEM_DIR}" ~/Dropbox/Python\ Workspace/SGD/BYZSHIELD/ ubuntu@${PUB_IP_ADDR}:~/BYZSHIELD${PROJECT_INDEX} --exclude '*data' --exclude '__pycache__'
 # ssh -i ${KEY_PEM_DIR} ubuntu@${PUB_IP_ADDR} 'sudo apt-get update; cp BYZSHIELD/tools/remote_script.sh ~/'

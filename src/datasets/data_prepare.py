@@ -9,8 +9,8 @@ from torchvision import datasets, transforms
 from torchvision.datasets import SVHN
 
 # Flags to set data sets to download
-mnist = False
-cifar10 = True
+mnist = True
+cifar10 = False
 svhn = False
 cifar100 = False
 
