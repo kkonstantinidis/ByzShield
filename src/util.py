@@ -572,15 +572,15 @@ def prepare(args, rank, world_size):
                     'adversaries':adversaries,
                     'device':device
                     } # ~ group_list, group_seeds, group_num & adversaries are stored in worker's dict
-    # ~ draco lite & all other Kostas cases
+    # ~ draco lite & all other X cases
     elif args.approach == "draco_lite" or args.approach == "draco_lite_attack" or args.approach == "mols" or args.approach == "rama_one" or args.approach == "rama_two":
         seeds = epoch_seeds(args.epochs) # ~ won't be used by DETOX, only by ByzShield
         if args.approach == "draco_lite":
             adversaries = _generate_adversarial_nodes(args, world_size) # ~ randomly chooses the adversaries at the beginning of training
             group_list, group_num, group_seeds=group_assign(world_size-1, args.group_size, rank)
             train_loader, training_set, test_loader = load_data(dataset=args.dataset, seed=group_seeds[group_num], args=args, rank=rank) # loader seeds for torch are set here but are they persistent ??? they are set later too
-        elif args.approach == "draco_lite_attack": # ~ draco lite Kostas attack
-            adversaries = _attack_detox(args, world_size) # ~ chooses the adversaries such that the majority of each group is distorted (Kostas attack)
+        elif args.approach == "draco_lite_attack": # ~ draco lite X attack
+            adversaries = _attack_detox(args, world_size) # ~ chooses the adversaries such that the majority of each group is distorted (X attack)
             group_list, group_num, group_seeds=group_assign(world_size-1, args.group_size, rank)
             train_loader, training_set, test_loader = load_data(dataset=args.dataset, seed=group_seeds[group_num], args=args, rank=rank)
         elif args.approach == "mols": # ~ MOLS

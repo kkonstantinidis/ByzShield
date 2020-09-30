@@ -204,7 +204,7 @@ if __name__ == "__main__": # ~ PS and workers will call this
             logger.info("I am worker: {} in all {} workers, next step: {}".format(coded_worker.rank, coded_worker.world_size-1, coded_worker.next_step))
             coded_worker.train(train_loader=train_loader, test_loader=test_loader)
             logger.info("Now the next step is: {}".format(coded_worker.next_step))
-    elif args.approach == "draco_lite" or args.approach == "draco_lite_attack": # ~ DETOX method, Kostas DETOX attack method
+    elif args.approach == "draco_lite" or args.approach == "draco_lite_attack": # ~ DETOX method, X DETOX attack method
         train_loader, _, test_loader = datum
         if rank == 0:
             coded_master = draco_lite_master.DracoLiteMaster(comm=comm, **kwargs_master) # ~ util.py is importing this
