@@ -509,7 +509,8 @@ def prepare(args, rank, world_size):
                     'device':device,
                     'adversaries':adversaries,
                     'gamma':args.gamma,
-                    'lr_step':args.lr_step
+                    'lr_step':args.lr_step,
+                    'err_mode':args.err_mode
                     }
         kwargs_worker = {
                     'update_mode':args.mode,  # for implementing signSGD
@@ -628,7 +629,8 @@ def prepare(args, rank, world_size):
                     'adversaries':adversaries,
                     'c_q_max':c_q_max[world_size-1][args.worker_fail], # ~ won't be used by DETOX, only by ByzShield
                     'gamma':args.gamma,
-                    'lr_step':args.lr_step
+                    'lr_step':args.lr_step,
+                    'err_mode':args.err_mode
                     }
         kwargs_worker = {
                     'update_mode':args.mode,  # for implementing signSGD

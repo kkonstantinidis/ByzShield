@@ -39,7 +39,35 @@ echo "Starting evaluation ..."
 # bash evaluate_pytorch.sh 77 5 0.01 0.95 1040 && \
 # bash evaluate_pytorch.sh 79 5 0.025 0.96 1040
 
-bash evaluate_pytorch.sh 81 9 0.05 0.96 1040
+# bash evaluate_pytorch.sh 81 9 0.05 0.96 1040
+
+# bash evaluate_pytorch.sh 500 3 0.0125 0.96 200 && \
+# bash evaluate_pytorch.sh 500 3 0.00625 0.96 200 && \
+# bash evaluate_pytorch.sh 500 3 0.003125 0.96 200 && \
+# bash evaluate_pytorch.sh 501 3 0.025 0.96 200 && \
+# bash evaluate_pytorch.sh 502 3 0.01 0.96 200 && \
+# bash evaluate_pytorch.sh 504 3 0.00625 0.96 200 && \
+# bash evaluate_pytorch.sh 504 3 0.003125 0.96 200 && \
+# bash evaluate_pytorch.sh 504 3 0.0015625 0.96 200 && \
+# bash evaluate_pytorch.sh 505 3 0.0125 0.96 200 && \
+# bash evaluate_pytorch.sh 505 3 0.00625 0.96 200 && \
+# bash evaluate_pytorch.sh 505 3 0.003125 0.96 200 && \
+# bash evaluate_pytorch.sh 503 3 0.025 0.96 200 && \
+# bash evaluate_pytorch.sh 503 3 0.0125 0.96 200 && \
+# bash evaluate_pytorch.sh 503 3 0.00625 0.96 200 && \
+# bash evaluate_pytorch.sh 506 3 0.05 0.96 200 && \
+# bash evaluate_pytorch.sh 506 3 0.025 0.96 200 && \
+# bash evaluate_pytorch.sh 506 3 0.0125 0.96 200
+
+
+bash evaluate_pytorch.sh 82 2 0.003125 0.96 1040 && \
+bash evaluate_pytorch.sh 86 2 0.0015625 0.96 1040 && \
+bash evaluate_pytorch.sh 87 2 0.003125 0.96 1040 && \
+bash evaluate_pytorch.sh 85 2 0.0125 0.96 1040 && \
+bash evaluate_pytorch.sh 88 2 0.0125 0.96 1040 && \
+bash evaluate_pytorch.sh 82 4 0.003125 0.96 1040 && \
+bash evaluate_pytorch.sh 83 2 0.01 0.96 1040
+
 
 # for PROJECT_INDEX in 1
 # do

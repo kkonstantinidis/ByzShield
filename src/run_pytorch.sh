@@ -3,31 +3,32 @@ PROJECT_INDEX="$1"
 n=16
 group_size=3
 bucket_size=1
-batch_size=150
+batch_size=50
 rama_m=5
 eval_freq=40
-max_steps=200
+max_steps=10
 # lr_step=${eval_freq}
 lr_step=15
 checkpoint_step=0
 
-# approach=baseline
+approach=baseline
 # approach=maj_vote
 # approach=draco_lite
-approach=draco_lite_attack
+# approach=draco_lite_attack
 # approach=mols
 # approach=rama_one
 # approach=rama_two
 
-err_mode=rev_grad
+# err_mode=rev_grad
 # err_mode=constant
+err_mode=foe
 
-lis_simulation=simulate
-# lis_simulation=nope
+# lis_simulation=simulate
+lis_simulation=nope
 
-# mode=coord-median
+mode=coord-median
 # mode=bulyan
-mode=multi-krum
+# mode=multi-krum
 # mode=sign-sgd
 
 # hostfile="tools/hosts_address"
@@ -46,7 +47,7 @@ tune_dir=${HOME}/shared/tune/BYZSHIELD${PROJECT_INDEX}
 echo "Start parameter tuning ..."
 for q in 3
 do
-    for lr in 0.05 0.025 0.0125
+    for lr in 0.05
     do
         for gamma in 0.96
         do

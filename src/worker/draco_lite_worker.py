@@ -112,7 +112,7 @@ class DracoLiteWorker(DistributedWorker):
             
             torch.manual_seed(self._group_seeds[self._group_num]+num_epoch) # ~ the +num_epoch is not necessary it's just so that they don't get the exact same data at each epoch
             
-            # ~test
+            # ~ test
             # logger.info("DEBUG_W_DETOX: torch.manual_seed: {}".format(self._group_seeds[self._group_num]+num_epoch))
             
             for batch_idx, (train_image_batch, train_label_batch) in enumerate(train_loader):

@@ -51,6 +51,8 @@ class SyncReplicasMaster_NN(NN_Trainer):
         ###########################################
         
         self._fail_workers = kwargs['adversaries'] # ~ the same set of Byzantines will be used in ALIE (not a new random one)
+        
+        self._err_mode = kwargs['err_mode']
 
     def build_model(self):
         # ~ test
@@ -148,7 +150,9 @@ class SyncReplicasMaster_NN(NN_Trainer):
             ################### "A Little is enough" attack simulation on the PS"#########################
             if self._lis_simulation == "simulate":
                 self._LIE_attack_simulation()
-            else:
+            elif self._err_mode == "foe":
+                self._FoE_attack_simulation()
+            else: # ~ the rest of the attacks are simulated at the worker level
                 pass
 
             if self._update_mode == "normal":
@@ -190,6 +194,9 @@ class SyncReplicasMaster_NN(NN_Trainer):
             logger.info("PS_BASELINE: Master Step: {}, Method Time Cost: {}, Update Time Cost: {}".format(self.cur_step, method_duration, update_duration))
             logger.info("PS_BASELINE: Real time Lr: {}".format([param_group['lr'] for param_group in self.optimizer.param_groups]))
             self.cur_step += 1
+            
+            # ~ test
+            # break
 
     def init_model_shapes(self):
         self._model_param_counter = 0
@@ -532,15 +539,58 @@ class SyncReplicasMaster_NN(NN_Trainer):
         self.__z = 1.0
         # dummpy_adversarial_nodes = np.random.choice(self.num_workers, self._s, replace=False)
         
-        # ~ option 2: choice of Byzantines won't change for ALIE
-        dummpy_adversarial_nodes = self._fail_workers[self.cur_step]
+        # ~ option 2: choice of Byzantines won't change for ALIE, unlike DETOX/ByzShield indexing is off by 1 here
+        dummpy_adversarial_nodes = [x-1 for x in self._fail_workers[self.cur_step]]
+        
+        # logger.info("DEBUG_PS_BASELINE: dummpy_adversarial_nodes: {}".format(dummpy_adversarial_nodes))
         
         if self._update_mode in ("bulyan", "multi-krum", "coord-median"):
             mu, sigma = np.mean(self._robust_aggr_buffer, axis=0), np.std(self._robust_aggr_buffer, axis=0)
             for adv_index in dummpy_adversarial_nodes:
                 self._robust_aggr_buffer[adv_index] = mu + self.__z * sigma
-        else:
+        else: # this does not work for "sign-sgd", maybe it's supposed to do so
             for param_idx, param in enumerate(self.network.parameters()):
                 mu, sigma = np.mean(self._grad_aggregate_buffer[param_idx], axis=0), np.std(self._grad_aggregate_buffer[param_idx], axis=0)
                 for adv_index in dummpy_adversarial_nodes:
                     self._grad_aggregate_buffer[param_idx][adv_index] = mu + self.__z * sigma
+
+
+    # ~ Fall of Empires attack
+    # For the baseline, I have not implemented it to support sign-sgd.
+    def _FoE_attack_simulation(self):
+        """
+        Simulating the attack method in: https://arxiv.org/abs/1903.03936
+        Fall of Empires: Breaking Byzantine-tolerant SGD by Inner Product Manipulation
+        """
+        # dummpy_adversarial_nodes = np.random.choice(self.num_workers, self._s, replace=False)
+        
+        # ~ option 2: choice of Byzantines won't change for FoE
+        # no need to do the -1 offset like ALIE, see below
+        dummpy_adversarial_nodes = self._fail_workers[self.cur_step]
+        
+        # ~ test
+        # logger.info("DEBUG_PS_BASELINE: dummpy_adversarial_nodes: {}".format(dummpy_adversarial_nodes))
+        # logger.info("DEBUG_PS_BASELINE: _robust_aggr_buffer, _grad_aggregate_buffer: {} {}".format(np.shape(self._robust_aggr_buffer), np.shape(self._grad_aggregate_buffer)))
+        
+        FACTOR = 100
+        
+        if self._update_mode in ("bulyan", "multi-krum", "coord-median"):
+            tempt_grads = []
+            for i in range(self.num_workers):
+                if i+1 not in dummpy_adversarial_nodes:
+                    tempt_grads.append(self._robust_aggr_buffer[i])
+            
+            mu = np.mean(tempt_grads, axis=0)
+            
+            # ~ test
+            # np.save('BASELINE_FoE_mu', mu)
+            # logger.info("DEBUG_PS_BASELINE: FoE tempt_grads, mu: {} {}".format(np.shape(tempt_grads), np.shape(mu)))
+            
+            for adv_index in dummpy_adversarial_nodes:
+                self._robust_aggr_buffer[adv_index-1] = -FACTOR*mu
+            
+            # ~ test
+            # for i in range(self.num_workers):
+                # np.save('BASELINE_robust_aggr_buffer_worker_'+str(i), self._robust_aggr_buffer[i])
+                
+            

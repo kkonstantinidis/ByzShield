@@ -1,0 +1,12 @@
+hosts
+__pycache__
+hosts_address
+hosts_address_local
+hosts_alias
+evaluation.txt
+changelog.txt
+cifar10_data
+cifar100_data
+mnist_data
+svhn_data
+virginiakey.pem

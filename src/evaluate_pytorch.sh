@@ -26,7 +26,7 @@ LAST_STEP_VALUE="${5:-0}" # 5th parameter is optional, set to 0 if not given
 # ~ for tuning subfolder
 python distributed_evaluator.py \
 --eval-batch-size=10000 \
---eval-freq=40 \
+--eval-freq=52 \
 --network=ResNet18 \
 --dataset=Cifar10 \
 --model-dir=${HOME}/shared/tune/BYZSHIELD${PROJECT_INDEX}/output_q_${Q_VALUE}_lr_${LR_VALUE}_gamma_${GAMMA_VALUE}/ \
