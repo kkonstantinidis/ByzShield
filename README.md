@@ -227,7 +227,7 @@ The basic arguments of this script along with all possible values are below.
 title = {ByzShield: An Efficient and Robust System for Distributed Training},
 author = {Konstantinos Konstantinidis and Aditya Ramamoorthy},
 year = {2020},
-month = {September},
+month = {October},
 url = {https://arxiv.org/abs/2010.04902}}
 }
 ```
