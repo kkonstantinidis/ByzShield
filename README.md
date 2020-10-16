@@ -222,7 +222,7 @@ The basic arguments of this script along with all possible values are below.
 
 
 ## Citation
-If you use this code please cite our paper available at [arXiv](https://arxiv.org/pdf/2010.04902). The BibTeX is:
+If you use this code please cite our paper available at [arXiv](https://arxiv.org/abs/2010.04902). The BibTeX is:
 ```
 @inproceedings{konstantinidis_ramamoorthy_byzshield,
 title = {ByzShield: An Efficient and Robust System for Distributed Training},
