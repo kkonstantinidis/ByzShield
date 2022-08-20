@@ -222,15 +222,14 @@ The basic arguments of this script along with all possible values are below.
 
 
 ## Citation
-If you use this code please cite our paper available at [arXiv](https://arxiv.org/abs/2010.04902). The BibTeX is:
+If you use this code please cite our MLSys 2021 [paper](https://proceedings.mlsys.org/paper/2021/file/d9d4f495e875a2e075a1a4a6e1b9770f-Paper.pdf):
 ```
 @inproceedings{konstantinidis_ramamoorthy_byzshield,
-title = {ByzShield: An Efficient and Robust System for Distributed Training},
-author = {Konstantinos Konstantinidis and Aditya Ramamoorthy},
-year = {2020},
-month = {October},
-url = {https://arxiv.org/abs/2010.04902}}
-}
+author = {Konstantinidis, Konstantinos and Ramamoorthy, Aditya},
+title = {{ByzShield}: An Efficient and Robust System for Distributed Training},
+booktitle = {Machine Learning and Systems 3 (MLSys 2021)},
+year = {2021},
+month = {April}}
 ```
 
 
