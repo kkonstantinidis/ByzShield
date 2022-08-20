@@ -222,7 +222,7 @@ The basic arguments of this script along with all possible values are below.
 
 
 ## Citation
-If you use this code please cite our MLSys 2021 [paper](https://proceedings.mlsys.org/paper/2021/file/d9d4f495e875a2e075a1a4a6e1b9770f-Paper.pdf):
+If you use this code please cite our MLSys 2021 [paper](https://proceedings.mlsys.org/paper/2021/file/d9d4f495e875a2e075a1a4a6e1b9770f-Paper.pdf). The BibTeX is:
 ```
 @inproceedings{konstantinidis_ramamoorthy_byzshield,
 author = {Konstantinidis, Konstantinos and Ramamoorthy, Aditya},
